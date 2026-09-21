@@ -1,0 +1,70 @@
+body {
+    background-color: rgb(102, 102, 102);
+}
+.container {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+    background-color: rgb(15, 66, 107);
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.container_odkazy {
+    width: 10%;
+    margin: 0 ;
+    padding: 10px;
+    background-color: rgb(160, 160, 160);
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+   box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+}
+
+.container_golmani {
+    width: 4%;
+    margin: 50px;
+    padding: 0px 5px;
+    background-color: rgb(66, 137, 179);
+    border-radius: 10px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.container_obranci {
+    width: 4%;
+    margin: 50px;
+    padding: 0px 5px;
+    background-color: rgb(66, 137, 179);
+    border-radius: 10px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.container_zaloznici {
+    width: 4%;
+    margin: 50px;
+    padding: 0px 5px;
+    background-color: rgb(66, 137, 179);
+    border-radius: 10px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.container_utocnici {
+    width: 4%;
+    margin: 50px;
+    padding: 0px 5px;
+    background-color: rgb(66, 137, 179);
+    border-radius: 10px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+ box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
