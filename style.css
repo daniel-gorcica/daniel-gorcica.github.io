@@ -1,74 +1,189 @@
-body {
-    background-color: #f5f5f5;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
+* {
+    box-sizing: border-box;
 }
 
+body {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.hlavicka {
+    background-color: #00529f;
+    color: white;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 4px solid #febe10;
+}
+
+.logo {
+    width: 80px;
+    height: auto;
+    background: white;
+    padding: 5px;
+    border-radius: 8px;
+}
 
 h1 {
-    color: #003366;
-    font-size: 40px;
-    text-align: center;
+    margin: 0;
+    font-size: 32px;
+}
+
+.podnadpis {
+    color: #febe10;
+    font-weight: bold;
+    margin: 5px 0 0 0;
+}
+
+.menu {
+    background-color: white;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.menu a {
+    color: #00529f;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 8px;
+}
+
+.menu a:hover {
+    color: #febe10;
+}
+
+.obsah {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 0 15px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+.karta {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
 }
 
 h2 {
-    color: #003366;
-    border-bottom: 2px solid #FFB81C;
-    padding-bottom: 10px;
-    margin-top: 30px;
+    color: #00529f;
+    margin-top: 0;
+    border-left: 4px solid #febe10;
+    padding-left: 10px;
 }
 
-h4 {
-    background-color: #003366;
-    color: white;
-    padding: 10px;
-    margin-top: 30px;
+h3 {
+    color: #00529f;
+    margin-top: 15px;
 }
 
-p {
-    line-height: 1.6;
-    color: #333;
+.mrizka-legendy,
+.mrizka-hraci {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
 }
 
-ul {
-    list-style-type: square;
-    color: #333;
+.polozka,
+.hrac {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-weight: bold;
 }
 
-li {
-    margin: 10px 0;
-}
-
-img {
-    display: block;
-    margin: 20px auto;
-    border: 2px solid #003366;
+.cislo {
+    background-color: #00529f;
+    color: #febe10;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-right: 6px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
 }
 
-th {
-    background-color: #003366;
-    color: white;
+th, td {
     padding: 10px;
+    border-bottom: 1px solid #eee;
     text-align: left;
 }
 
-td {
-    border: 1px solid #ddd;
-    padding: 10px;
+th {
+    background-color: #f8fafc;
+    color: #00529f;
+}
+
+.rok {
+    background-color: #00529f;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.trener-jmeno {
+    font-size: 18px;
+    font-weight: bold;
 }
 
 a {
-    color: #003366;
-    text-decoration: underline;
+    color: #00529f;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 a:hover {
-    color: #FFB81C;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .obsah {
+        grid-template-columns: 1fr;
+        margin: 10px auto;
+    }
+
+    .hlavicka {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    .menu {
+        justify-content: center;
+    }
+
+    .menu a {
+        margin-right: 0;
+        background-color: #f1f5f9;
+        border-radius: 4px;
+    }
+
+    .karta {
+        padding: 15px;
+    }
+
+    .mrizka-legendy,
+    .mrizka-hraci {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
 }

@@ -3,115 +3,144 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Real Madrid</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1>Real Madrid</h1>
-    <h2>¡HALA MADRID!</h2>
 
-    <img src="logo.jpg" alt="Logo Realu Madrid" width="200" height="250">
+    <!-- Záhlaví -->
+    <header class="hlavicka">
+        <img src="logo.jpg" alt="Logo Realu Madrid" class="logo">
+        <div>
+            <h1>REAL MADRID</h1>
+            <p class="podnadpis">¡HALA MADRID!</p>
+        </div>
+    </header>
 
-    <h2>O klubu</h2>
+    <!-- Navigace -->
+    <nav class="menu">
+        <a href="#o-klubu">O klubu</a>
+        <a href="#hraci">Legendy</a>
+        <a href="#historie">Historie</a>
+        <a href="#trener">Trenér</a>
+        <a href="#soupiska">Soupiska</a>
+        <a href="#odkazy">Odkazy</a>
+    </nav>
 
-    <p>
-        Real Madrid je jeden z nejznámějších fotbalových klubů
-        na světě. Klub pochází ze Španělska a sídlí v Madridu.
-    </p>
+    <!-- Hlavní obal webu -->
+    <div class="obsah">
 
-    <h2>Nejznámější hráči</h2>
+        <!-- Levý hlavní panel -->
+        <main class="hlavni-panel">
 
-    <ul>
-        <li>Cristiano Ronaldo</li>
-        <li>Zinedine Zidane</li>
-        <li>Raúl González</li>
-        <li>Alfredo Di Stéfano</li>
-        <li>Ferenc Puskás</li>
-    </ul>
+            <section id="o-klubu" class="karta">
+                <h2>O klubu</h2>
+                <p>
+                    Real Madrid je jeden z nejznámějších a nejúspěšnějších fotbalových klubů
+                    na světě. Klub pochází ze Španělska a sídlí v hlavním městě Madridu.
+                </p>
+            </section>
 
-    <h2>Historie a úspěchy</h2>
+            <section id="hraci" class="karta">
+                <h2>Nejznámější hráči</h2>
+                <div class="mrizka-legendy">
+                    <div class="polozka">Cristiano Ronaldo</div>
+                    <div class="polozka">Zinedine Zidane</div>
+                    <div class="polozka">Raúl González</div>
+                    <div class="polozka">Alfredo Di Stéfano</div>
+                    <div class="polozka">Ferenc Puskás</div>
+                </div>
+            </section>
 
-    <table>
-        <tr>
-            <th>Rok</th>
-            <th>Úspěch</th>
-        </tr>
-        <tr>
-            <td>1902</td>
-            <td>Založení klubu</td>
-        </tr>
-        <tr>
-            <td>1956</td>
-            <td>První vítězství v Poháru mistrů evropských zemí</td>
-        </tr>
-        <tr>
-            <td>2014</td>
-            <td>Desátý titul v Lize mistrů UEFA</td>
-        </tr>
-    </table>
+            <section id="historie" class="karta">
+                <h2>Historie a úspěchy</h2>
+                <table>
+                    <tr>
+                        <th>Rok</th>
+                        <th>Úspěch</th>
+                    </tr>
+                    <tr>
+                        <td><span class="rok">1902</span></td>
+                        <td>Založení klubu</td>
+                    </tr>
+                    <tr>
+                        <td><span class="rok">1956</span></td>
+                        <td>První vítězství v Poháru mistrů evropských zemí</td>
+                    </tr>
+                    <tr>
+                        <td><span class="rok">2014</span></td>
+                        <td>Desátý titul v Lize mistrů UEFA (La Décima)</td>
+                    </tr>
+                </table>
+            </section>
 
-    <h2>Současný trenér</h2>
-    <p>José Mourinho</p>
-    
-    <h2>Odkazy</h2>
+            <section id="soupiska" class="karta">
+                <h2>Aktuální soupiska</h2>
 
-    <ul>
-        <li>
-            <a href="https://www.realmadrid.com/">
-                Oficiální web Real Madrid
-            </a>
-        </li>
-        <li>
-            <a href="https://en.wikipedia.org/wiki/Real_Madrid_CF">
-                Real Madrid na Wikipedii
-            </a>
-        </li>
-    </ul>
+                <h3>Gólmani</h3>
+                <div class="mrizka-hraci">
+                    <div class="hrac"><span class="cislo">#1</span> Thibaut Courtois</div>
+                    <div class="hrac"><span class="cislo">#13</span> Andrij Lunin</div>
+                </div>
 
-    <h2>Aktuální soupiska</h2>
+                <h3>Obránci</h3>
+                <div class="mrizka-hraci">
+                    <div class="hrac"><span class="cislo">#2</span> Raúl Asencio</div>
+                    <div class="hrac"><span class="cislo">#3</span> Éder Militão</div>
+                    <div class="hrac"><span class="cislo">#4</span> Dean Huijsen</div>
+                    <div class="hrac"><span class="cislo">#12</span> Trent Alexander-Arnold</div>
+                    <div class="hrac"><span class="cislo">#16</span> Ibrahima Konaté</div>
+                    <div class="hrac"><span class="cislo">#17</span> Marc Cucurella</div>
+                    <div class="hrac"><span class="cislo">#18</span> Álvaro Carreras</div>
+                    <div class="hrac"><span class="cislo">#22</span> Antonio Rüdiger</div>
+                    <div class="hrac"><span class="cislo">#23</span> Ferland Mendy</div>
+                    <div class="hrac"><span class="cislo">#24</span> Denzel Dumfries</div>
+                </div>
 
-    <h4>Gólmani</h4>
-    <ul>
-        <li>Thibaut Courtois (#1)</li>
-        <li>Andrij Lunin (#13)</li>
-    </ul>
+                <h3>Záložníci</h3>
+                <div class="mrizka-hraci">
+                    <div class="hrac"><span class="cislo">#5</span> Jude Bellingham</div>
+                    <div class="hrac"><span class="cislo">#6</span> Eduardo Camavinga</div>
+                    <div class="hrac"><span class="cislo">#8</span> Federico Valverde</div>
+                    <div class="hrac"><span class="cislo">#14</span> Aurélien Tchouaméni</div>
+                    <div class="hrac"><span class="cislo">#15</span> Arda Güler</div>
+                    <div class="hrac"><span class="cislo">#20</span> Bernardo Silva</div>
+                </div>
 
-    <h4>Obránci</h4>
-    <ul>
-        <li>Raúl Asencio (#2)</li>
-        <li>Éder Militão (#3)</li>
-        <li>Dean Huijsen (#4)</li>
-        <li>Trent Alexander-Arnold (#12)</li>
-        <li>Ibrahima Konaté (#16)</li>
-        <li>Marc Cucurella (#17)</li>
-        <li>Álvaro Carreras (#18)</li>
-        <li>Antonio Rüdiger (#22)</li>
-        <li>Ferland Mendy (#23)</li>
-        <li>Denzel Dumfries (#24)</li>
-    </ul>
+                <h3>Útočníci</h3>
+                <div class="mrizka-hraci">
+                    <div class="hrac"><span class="cislo">#7</span> Vinícius Júnior</div>
+                    <div class="hrac"><span class="cislo">#9</span> Endrick</div>
+                    <div class="hrac"><span class="cislo">#10</span> Kylian Mbappé</div>
+                    <div class="hrac"><span class="cislo">#11</span> Rodrygo</div>
+                    <div class="hrac"><span class="cislo">#19</span> Carlos Espí</div>
+                    <div class="hrac"><span class="cislo">#21</span> Brahim Díaz</div>
+                    <div class="hrac"><span class="cislo">#25</span> Yan Diomande</div>
+                    <div class="hrac"><span class="cislo">#30</span> Franco Mastantuono</div>
+                </div>
+            </section>
 
-    <h4>Záložníci</h4>
-    <ul>
-        <li>Jude Bellingham (#5)</li>
-        <li>Eduardo Camavinga (#6)</li>
-        <li>Federico Valverde (#8)</li>
-        <li>Aurélien Tchouaméni (#14)</li>
-        <li>Arda Güler (#15)</li>
-        <li>Bernardo Silva (#20)</li>
-    </ul>
+        </main>
 
-    <h4>Útočníci</h4>
-    <ul>
-        <li>Vinícius Júnior (#7)</li>
-        <li>Endrick (#9)</li>
-        <li>Kylian Mbappé (#10)</li>
-        <li>Rodrygo (#11)</li>
-        <li>Carlos Espí (#19)</li>
-        <li>Brahim Díaz (#21)</li>
-        <li>Yan Diomande (#25)</li>
-        <li>Franco Mastantuono (#30)</li>
-    </ul>
+        <!-- Pravý postranní panel -->
+        <aside class="postranni-panel">
+
+            <div id="trener" class="karta">
+                <h3>Současný trenér</h3>
+                <p class="trener-jmeno">José Mourinho</p>
+            </div>
+
+            <div id="odkazy" class="karta">
+                <h3>Užitečné odkazy</h3>
+                <p><a href="https://www.realmadrid.com/" target="_blank">Oficiální web &rarr;</a></p>
+                <p><a href="https://en.wikipedia.org/wiki/Real_Madrid_CF" target="_blank">Wikipedie &rarr;</a></p>
+            </div>
+
+        </aside>
+
+    </div>
 
 </body>
 
