@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel // Portfolio vývojáře</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="moving-clouds">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+    </div>
+
+    <div class="sunset-sun"></div>
+    <div class="moon"></div>
+    <div class="sunset-sea"></div>
+
+    <div class="pixel-stars">
+        <span class="pixel-star star-1"></span>
+        <span class="pixel-star star-2"></span>
+        <span class="pixel-star star-3"></span>
+        <span class="pixel-star star-4"></span>
+        <span class="pixel-star star-5"></span>
+        <span class="pixel-star star-6"></span>
+        <span class="pixel-star star-7"></span>
+        <span class="pixel-star star-8"></span>
+        <span class="pixel-star star-9"></span>
+        <span class="pixel-star star-10"></span>
+        <span class="pixel-star star-11"></span>
+        <span class="pixel-star star-12"></span>
+    </div>
+
+    <header class="site-header">
+        <a class="logo" href="#domu">MENU</a>
+        <nav>
+            <a href="#domu">ÚVOD</a>
+            <a href="#o-mne">O MNĚ</a>
+            <a href="#projekty">PROJEKTY</a>
+            <a href="#kontakt">KONTAKT</a>
+        </nav>
+    </header>
+
+    <main id="domu">
+        <section class="hero">
+            <div class="hero-copy">
+                <p class="eyebrow blink">▶ NOVÝ HRÁČ SE PŘIPOJIL</p>
+                <h1>Ahoj, jsem<br><span class="accent">Daniel</span><br><span class="outline">vývojá<span
+                            class="diacritic">r</span>.</span></h1>
+                <p class="intro">Tvořím weby a aplikace, které jsou rychlé, nápadité a snadno se používají. Každý
+                    projekt je další level.</p>
+                <div class="hero-actions">
+                    <a class="button button-primary" href="#projekty">START GAME ▶</a>
+                    <a class="button button-secondary" href="#kontakt">NAPIŠ MI</a>
+                </div>
+            </div>
+
+            <div class="avatar-box">
+                <div class="avatar-screen">
+                    <svg class="pixel-avatar" viewBox="0 0 64 46" shape-rendering="crispEdges">
+                        <defs>
+                            <linearGradient id="sun-grad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0" stop-color="#ffc857" />
+                                <stop offset=".55" stop-color="#ff334f" />
+                                <stop offset="1" stop-color="#85152f" />
+                            </linearGradient>
+                            <mask id="sun-mask">
+                                <rect width="64" height="46" fill="#fff" />
+                                <rect y="22" width="64" height="1" fill="#000" />
+                                <rect y="24" width="64" height="1" fill="#000" />
+                                <rect y="26" width="64" height="2" fill="#000" />
+                                <rect y="29" width="64" height="2" fill="#000" />
+                            </mask>
+                            <g id="figure">
+                                <rect x="28" y="12" width="8" height="1" />
+                                <rect x="26" y="13" width="12" height="1" />
+                                <rect x="24" y="14" width="16" height="1" />
+                                <rect x="23" y="15" width="18" height="1" />
+                                <rect x="22" y="16" width="20" height="1" />
+                                <rect x="21" y="17" width="22" height="8" />
+                                <rect x="20" y="25" width="24" height="1" />
+                                <rect x="19" y="26" width="26" height="1" />
+                                <rect x="17" y="27" width="30" height="1" />
+                                <rect x="15" y="28" width="34" height="1" />
+                                <rect x="13" y="29" width="38" height="1" />
+                                <rect x="12" y="30" width="40" height="1" />
+                                <rect x="11" y="31" width="42" height="13" />
+                            </g>
+                        </defs>
+
+                        <circle cx="32" cy="17" r="15" fill="url(#sun-grad)" mask="url(#sun-mask)" opacity=".9" />
+
+                        <g class="twinkle" fill="#ffc857">
+                            <rect x="6" y="6" width="1" height="1" />
+                            <rect x="4" y="30" width="1" height="1" />
+                            <rect x="46" y="7" width="1" height="1" />
+                            <rect x="60" y="20" width="1" height="1" />
+                            <rect x="57" y="38" width="1" height="1" />
+                        </g>
+
+                        <g class="float">
+                            <rect x="3" y="10" width="7" height="1" fill="#ffc857" />
+                            <rect x="5" y="12" width="9" height="1" fill="#ff334f" />
+                            <rect x="5" y="14" width="5" height="1" fill="#c49a91" />
+                            <rect x="3" y="16" width="8" height="1" fill="#ffc857" />
+                            <rect x="7" y="18" width="2" height="1" fill="#fff1dc" />
+                        </g>
+
+                        <g class="float" style="animation-delay:-1.2s">
+                            <rect x="53" y="26" width="8" height="1" fill="#ff334f" />
+                            <rect x="55" y="28" width="5" height="1" fill="#ffc857" />
+                            <rect x="53" y="30" width="7" height="1" fill="#c49a91" />
+                            <rect x="55" y="32" width="6" height="1" fill="#ff334f" />
+                        </g>
+
+                        <g class="bob">
+                            <use href="#figure" y="-1" fill="#ff7a8a" opacity=".6" />
+                            <use href="#figure" x="-1" fill="#ff334f" />
+                            <use href="#figure" x="1" fill="#ffc857" opacity=".55" />
+                            <use href="#figure" fill="#12060a" />
+
+                            <g fill="#3a1522">
+                                <rect x="15" y="29" width="5" height="1" />
+                                <rect x="44" y="29" width="5" height="1" />
+                                <rect x="13" y="33" width="2" height="6" />
+                                <rect x="49" y="33" width="2" height="6" />
+                                <rect x="24" y="27" width="16" height="1" />
+                            </g>
+
+                            <g fill="#4a1d2a">
+                                <rect x="28" y="11" width="8" height="1" />
+                                <rect x="26" y="12" width="2" height="1" />
+                                <rect x="36" y="12" width="2" height="1" />
+                                <rect x="24" y="13" width="2" height="1" />
+                                <rect x="38" y="13" width="2" height="1" />
+                                <rect x="22" y="14" width="2" height="1" />
+                                <rect x="40" y="14" width="2" height="1" />
+                                <rect x="20" y="15" width="2" height="1" />
+                                <rect x="42" y="15" width="2" height="1" />
+                                <rect x="19" y="16" width="2" height="3" />
+                                <rect x="43" y="16" width="2" height="3" />
+                            </g>
+                            <rect x="28" y="11" width="8" height="1" fill="#ff334f" />
+
+                            <rect x="17" y="19" width="4" height="7" fill="#1d0c13" />
+                            <rect x="17" y="19" width="1" height="7" fill="#ff334f" />
+                            <rect x="18" y="20" width="2" height="5" fill="#3a1522" />
+                            <rect x="19" y="21" width="1" height="3" fill="#ffc857" />
+                            <rect x="43" y="19" width="4" height="7" fill="#1d0c13" />
+                            <rect x="46" y="19" width="1" height="7" fill="#ff334f" />
+                            <rect x="44" y="20" width="2" height="5" fill="#3a1522" />
+                            <rect x="44" y="21" width="1" height="3" fill="#ffc857" />
+
+                            <g fill="#040102">
+                                <rect x="27" y="19" width="10" height="1" />
+                                <rect x="25" y="20" width="14" height="6" />
+                                <rect x="26" y="26" width="12" height="1" />
+                            </g>
+                            <g class="eyes">
+                                <rect x="27" y="23" width="3" height="1" fill="#87551c" />
+                                <rect x="34" y="23" width="3" height="1" fill="#87551c" />
+                                <rect x="27" y="22" width="3" height="1" fill="#ffc857" />
+                                <rect x="34" y="22" width="3" height="1" fill="#ffc857" />
+                                <rect x="28" y="22" width="1" height="1" fill="#fff1dc" />
+                                <rect x="35" y="22" width="1" height="1" fill="#fff1dc" />
+                            </g>
+
+                            <g fill="#c49a91">
+                                <rect x="29" y="28" width="1" height="6" />
+                                <rect x="34" y="28" width="1" height="6" />
+                            </g>
+                            <rect x="29" y="34" width="1" height="1" fill="#ffc857" />
+                            <rect x="34" y="34" width="1" height="1" fill="#ffc857" />
+                        </g>
+
+                        <rect x="19" y="36" width="26" height="8" fill="#0f0508" />
+                        <rect x="19" y="36" width="26" height="1" fill="#ff334f" />
+                        <rect x="19" y="37" width="1" height="7" fill="#3a1522" />
+                        <rect x="44" y="37" width="1" height="7" fill="#3a1522" />
+                        <rect x="28" y="37" width="8" height="5" fill="#ffc857" opacity=".12" />
+                        <rect x="31" y="38" width="2" height="1" fill="#ffc857" />
+                        <rect x="30" y="39" width="4" height="1" fill="#ffc857" />
+                        <rect x="31" y="40" width="2" height="1" fill="#ffc857" />
+
+                        <rect x="14" y="44" width="36" height="2" fill="#5e2733" />
+                        <rect x="14" y="44" width="36" height="1" fill="#853344" />
+                    </svg>
+                    <span class="corner top-left">+</span>
+                    <span class="corner top-right">+</span>
+                    <span class="corner bottom-left">+</span>
+                    <span class="corner bottom-right">+</span>
+                </div>
+                <div class="avatar-status"><span class="status-dot"></span> ONLINE / LEVEL 05</div>
+            </div>
+        </section>
+
+        <div class="stats">
+            <div><strong>03</strong><span>LET ZKUŠENOSTÍ</span></div>
+            <div><strong>02</strong><span>DOKONČENÉ PROJEKTY</span></div>
+            <div><strong>∞</strong><span>CHUTI TVOŘIT</span></div>
+        </div>
+
+        <section class="content-section" id="o-mne">
+            <div class="section-heading"><span>01 //</span>
+                <h2>O MNĚ</h2>
+            </div>
+            <div class="about-grid">
+                <div class="about-copy">
+                    <p class="large-copy">Jsem <span class="accent">začínající vývojář</span>, který se učí tvořit weby
+                        a pracovat s kódem.</p>
+                    <p>Studuji obor zaměřený na informační technologie a baví mě především tvorba přehledných a vizuálně
+                        zajímavých webů. Každý nový projekt beru jako další level.</p>
+                    <p>Momentálně se soustředím na HTML a CSS, postupně objevuji Python a chci se dále rozvíjet v
+                        JavaScriptu.</p>
+                </div>
+                <div class="skill-panel">
+                    <p class="panel-label">▸ INVENTÁŘ DOVEDNOSTÍ</p>
+                    <ul class="skills">
+                        <li class="skill-item" data-tooltip="Základní stavební bloky. Zvládnuté na maximum!">
+                            <span>HTML</span><b>■■■■■</b>
+                        </li>
+                        <li class="skill-item" data-tooltip="Styling a design. Barvy a rozvržení pevně v rukou.">
+                            <span>CSS</span><b>■■■■■</b>
+                        </li>
+                        <li class="skill-item" data-tooltip="Rychlé zápisky a dokumentace. Inventář je skoro plný!">
+                            <span>MARKDOWN</span><b>■■■■□</b>
+                        </li>
+                        <li class="skill-item" data-tooltip="Trénink v tutoriálech, brzy boss fight s logikou!">
+                            <span>PYTHON</span><b>■■■□□</b>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section" id="projekty">
+            <div class="section-heading"><span>02 //</span>
+                <h2>VYBRANÉ PROJEKTY</h2>
+            </div>
+            <div class="project-grid">
+                <a href="https://daniel-gorcica.github.io/real_madrid/" target="_blank" class="project-card">
+                    <article>
+                        <div class="project-number">01</div>
+                        <div class="project-art art-crimson"><span>✦</span><i>REAL<br>MADRID</i></div>
+                        <div class="project-info">
+                            <h3>Real Madrid</h3>
+                            <p>Fanouškovský web o Realu Madrid s přehledem základních informací a klubové historie.</p>
+                            <span class="project-tech">HTML / CSS</span>
+                            <span class="project-link-text">ZOBRAZIT ↗</span>
+                        </div>
+                    </article>
+                </a>
+                <a href="https://daniel-gorcica.github.io/projekt1-web/" target="_blank" class="project-card">
+                    <article>
+                        <div class="project-number">02</div>
+                        <div class="project-art art-amber"><span>◆</span><i>ROCKET<br>LEAGUE</i></div>
+                        <div class="project-info">
+                            <h3>Rocket League</h3>
+                            <p>Tematický web inspirovaný hrou Rocket League, zaměřený na výrazný design a barvy.</p>
+                            <span class="project-tech">HTML / CSS</span>
+                            <span class="project-link-text">ZOBRAZIT ↗</span>
+                        </div>
+                    </article>
+                </a>
+            </div>
+        </section>
+
+        <section class="contact-section" id="kontakt">
+            <p class="eyebrow">▶ READY PLAYER?</p>
+            <h2>Pojďme vytvořit<br><span class="accent">něco skvělého.</span></h2>
+            <a class="button button-primary" href="mailto:D24634@oa-opava.cz">POSLAT ZPRÁVU ✉</a>
+        </section>
+    </main>
+
+    <footer>
+        <span>© 2026 DANIEL // VŠECHNA PRÁVA VYHRAZENA</span>
+        <div class="footer-links">
+            <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fdaniel-gorcica.github.io%2Fportfolio%2Findex.html"
+                target="_blank">HTML5 ✓</a>
+            <a href="https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fdaniel-gorcica.github.io%2Fportfolio%2Fstyle.css"
+                target="_blank">CSS3 ✓</a>
+            <a href="AI-CITACE.md">AI CITACE</a>
+        </div>
+    </footer>
+
+</body>
+
+</html>
