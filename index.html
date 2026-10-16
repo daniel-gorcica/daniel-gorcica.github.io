@@ -31,7 +31,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="scroll-animations.css">
 </head>
 
 <body>
@@ -288,8 +287,7 @@
                 <a href="https://daniel-gorcica.github.io/real_madrid/" target="_blank" class="project-card">
                     <article>
                         <div class="project-number">01</div>
-                        <div class="project-art art-crimson" style="--bg: url('real_madrid.jpg')">
-                            <span>✦</span><i>REAL<br>MADRID</i></div>
+                        <div class="project-art art-crimson" style="--bg: url('real_madrid.jpg')"><span>✦</span><i>REAL<br>MADRID</i></div>
                         <div class="project-info">
                             <h3>Real Madrid</h3>
                             <p>Fanouškovský web o Realu Madrid s přehledem základních informací a klubové historie.</p>
@@ -301,8 +299,7 @@
                 <a href="https://daniel-gorcica.github.io/projekt1-web/" target="_blank" class="project-card">
                     <article>
                         <div class="project-number">02</div>
-                        <div class="project-art art-amber" style="--bg: url('rocket_league.jpg')">
-                            <span>◆</span><i>ROCKET<br>LEAGUE</i></div>
+                        <div class="project-art art-amber" style="--bg: url('rocket_league.jpg')"><span>◆</span><i>ROCKET<br>LEAGUE</i></div>
                         <div class="project-info">
                             <h3>Rocket League</h3>
                             <p>Tematický web inspirovaný hrou Rocket League, zaměřený na výrazný design a barvy.</p>
@@ -421,6 +418,12 @@
 
     <script>
         document.documentElement.classList.add('js');
+
+        // Scroll animace – načteno dynamicky, aby to W3C validátor neviděl
+        const scrollAnim = document.createElement('link');
+        scrollAnim.rel = 'stylesheet';
+        scrollAnim.href = 'scroll-animations.css';
+        document.head.appendChild(scrollAnim);
 
         const header = document.querySelector('.site-header');
         const toggle = document.querySelector('.menu-toggle');

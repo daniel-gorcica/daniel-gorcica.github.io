@@ -1,16 +1,13 @@
 @charset "UTF-8";
 
-/* Všem prvkům se šířka počítá včetně paddingu a okrajů. */
 * {
     box-sizing: border-box;
 }
 
-/* Plynulé scrollování po kliknutí na odkaz v menu. */
 html {
     scroll-behavior: smooth;
 }
 
-/* Tmavé pozadí stránky s jemným přechodem a základní písmo. */
 body {
     margin: 0;
     color: #f7f7ff;
@@ -20,7 +17,6 @@ body {
     overflow-x: clip;
 }
 
-/* Odkazy přebírají barvu textu a nejsou podtržené. */
 a {
     color: inherit;
     text-decoration: none;
@@ -97,7 +93,7 @@ a {
     letter-spacing: 2px;
 }
 
-/* === SCROLL PROGRESS BAR (základ) === */
+/* === SCROLL PROGRESS BAR (základ, animace v scroll-animations.css) === */
 
 .scroll-progress {
     position: fixed;
@@ -110,13 +106,11 @@ a {
     background-size: 200% 100%;
     box-shadow: 0 0 10px rgba(255, 92, 124, .7);
     pointer-events: none;
+    display: none;
 }
 
-/* Pro prohlížeče bez animation-timeline – linka se nezobrazí. */
-@supports not (animation-timeline: scroll()) {
-    .scroll-progress {
-        display: none;
-    }
+.js .scroll-progress {
+    display: block;
 }
 
 /* === HLAVIČKA === */
@@ -999,6 +993,15 @@ footer {
     gap: 18px;
 }
 
+.footer-links a {
+    color: #adb5d0;
+    transition: color .2s ease;
+}
+
+.footer-links a:hover {
+    color: #ffd166;
+}
+
 /* === AKTIVNÍ ODKAZ === */
 
 nav a.active {
@@ -1523,8 +1526,6 @@ footer {
         font-size: 11px;
     }
 }
-
-/* === MALÉ DISPLEJE === */
 
 @media (max-width: 380px) {
     .stats span {
