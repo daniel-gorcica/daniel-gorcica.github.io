@@ -1,14 +1,5 @@
 @charset "UTF-8";
 
-/* === PROMĚNNÉ === */
-:root {
-    /* Hodnoty pro scroll animace – v proměnných, aby je W3C validátor nekontroloval */
-    --scroll-root: scroll(root);
-    --scroll-root-auto: scroll(root), auto;
-    --range-0-600: 0 600px;
-    --range-500-1200: 500px 1200px;
-}
-
 /* Všem prvkům se šířka počítá včetně paddingu a okrajů. */
 * {
     box-sizing: border-box;
@@ -106,7 +97,7 @@ a {
     letter-spacing: 2px;
 }
 
-/* === SCROLL PROGRESS BAR === */
+/* === SCROLL PROGRESS BAR (základ) === */
 
 .scroll-progress {
     position: fixed;
@@ -118,31 +109,7 @@ a {
     background: linear-gradient(to right, #ff5c7c, #ffd166, #ff5c7c);
     background-size: 200% 100%;
     box-shadow: 0 0 10px rgba(255, 92, 124, .7);
-    animation:
-        scroll-grow linear both,
-        scroll-shine 3s linear infinite;
-    animation-timeline: var(--scroll-root-auto);
     pointer-events: none;
-}
-
-@keyframes scroll-grow {
-    from {
-        width: 0%;
-    }
-
-    to {
-        width: 100%;
-    }
-}
-
-@keyframes scroll-shine {
-    from {
-        background-position: 0% 0%;
-    }
-
-    to {
-        background-position: 200% 0%;
-    }
 }
 
 /* Pro prohlížeče bez animation-timeline – linka se nezobrazí. */
@@ -193,7 +160,6 @@ main {
     padding-top: 100px;
 }
 
-/* Pixelové písmo pro nadpisy, menu, tlačítka a štítky. */
 .logo,
 h1,
 h2,
@@ -725,7 +691,7 @@ h1 {
     letter-spacing: 1.5px;
 }
 
-/* === FAQ SEKCE === */
+/* === FAQ === */
 
 .faq-list {
     display: flex;
@@ -1033,7 +999,7 @@ footer {
     gap: 18px;
 }
 
-/* === AKTIVNÍ ODKAZ V MENU === */
+/* === AKTIVNÍ ODKAZ === */
 
 nav a.active {
     color: #ffd166;
@@ -1108,7 +1074,7 @@ nav a.active::after {
     }
 }
 
-/* === FADE-UP ANIMACE PŘI SCROLLU === */
+/* === FADE-UP === */
 
 .js .reveal {
     opacity: 0;
@@ -1193,46 +1159,6 @@ main,
 footer {
     position: relative;
     z-index: 1;
-}
-
-@keyframes sun-scroll {
-    from {
-        opacity: 1;
-        transform: translate(-50%, 0) scale(1);
-    }
-
-    to {
-        opacity: 0;
-        transform: translate(-50%, 140px) scale(0.6);
-    }
-}
-
-@keyframes moon-scroll {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -140px) scale(0.6);
-        box-shadow: 0 0 0px rgba(216, 217, 232, 0);
-    }
-
-    to {
-        opacity: 1;
-        transform: translate(-50%, 0) scale(1);
-        box-shadow: 0 0 12px rgba(216, 217, 232, 0.25);
-    }
-}
-
-@supports (animation-timeline: scroll()) {
-    .sunset-sun {
-        animation: sun-scroll linear both;
-        animation-timeline: var(--scroll-root);
-        animation-range: var(--range-0-600);
-    }
-
-    .moon {
-        animation: moon-scroll linear both;
-        animation-timeline: var(--scroll-root);
-        animation-range: var(--range-500-1200);
-    }
 }
 
 /* === HVĚZDIČKY === */
@@ -1536,7 +1462,6 @@ footer {
         font-size: 48px;
     }
 
-    /* FAQ na mobilu. */
     .faq-item summary {
         padding: 14px 16px;
         font-size: 10px;

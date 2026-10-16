@@ -5,16 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daniel // Portfolio vývojáře</title>
+
+    <meta name="description"
+        content="Portfolio Daniela Gorčici – začínajícího vývojáře. Weby a aplikace v HTML, CSS a Pythonu. Každý projekt je další level.">
+    <meta name="author" content="Daniel Gorčica">
+    <meta name="theme-color" content="#0d1020">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Daniel // Portfolio vývojáře">
+    <meta property="og:description"
+        content="Tvořím weby a aplikace, které jsou rychlé, nápadité a snadno se používají.">
+    <meta property="og:url" content="https://daniel-gorcica.github.io/">
+    <meta property="og:image" content="https://daniel-gorcica.github.io/og-image.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Daniel // Portfolio vývojáře">
+    <meta name="twitter:description"
+        content="Tvořím weby a aplikace, které jsou rychlé, nápadité a snadno se používají.">
+    <meta name="twitter:image" content="https://daniel-gorcica.github.io/og-image.png">
+
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="scroll-animations.css">
 </head>
 
 <body>
 
-    <!-- Loading screen -->
     <div class="loader" aria-hidden="true">
         <div class="loader-content">
             <p class="loader-text">▶ NAČÍTÁM HRU...</p>
@@ -25,7 +46,6 @@
         </div>
     </div>
 
-    <!-- Scroll progress bar -->
     <div class="scroll-progress" aria-hidden="true"></div>
 
     <div class="moving-clouds">
@@ -268,8 +288,7 @@
                 <a href="https://daniel-gorcica.github.io/real_madrid/" target="_blank" class="project-card">
                     <article>
                         <div class="project-number">01</div>
-                        <div class="project-art art-crimson" style="--bg: url('real_madrid.jpg')">
-                            <span>✦</span><i>REAL<br>MADRID</i></div>
+                        <div class="project-art art-crimson" style="--bg: url('real_madrid.jpg')"><span>✦</span><i>REAL<br>MADRID</i></div>
                         <div class="project-info">
                             <h3>Real Madrid</h3>
                             <p>Fanouškovský web o Realu Madrid s přehledem základních informací a klubové historie.</p>
@@ -281,8 +300,7 @@
                 <a href="https://daniel-gorcica.github.io/projekt1-web/" target="_blank" class="project-card">
                     <article>
                         <div class="project-number">02</div>
-                        <div class="project-art art-amber" style="--bg: url('rocket_league.jpg')">
-                            <span>◆</span><i>ROCKET<br>LEAGUE</i></div>
+                        <div class="project-art art-amber" style="--bg: url('rocket_league.jpg')"><span>◆</span><i>ROCKET<br>LEAGUE</i></div>
                         <div class="project-info">
                             <h3>Rocket League</h3>
                             <p>Tematický web inspirovaný hrou Rocket League, zaměřený na výrazný design a barvy.</p>
@@ -321,7 +339,7 @@
                         <span class="faq-marker">▶</span>
                         <span>Máš rád hry?</span>
                     </summary>
-                    <p>Jasně! Proto máš celý web v herním stylu.</p>
+                    <p>Jasně! Proto máš celý web v herním stylu. Baví mě Rocket League, Minecraft a retro hry.</p>
                 </details>
 
                 <details class="faq-item">
@@ -391,19 +409,15 @@
         </span>
 
         <div class="footer-links">
-            <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fdaniel-gorcica.github.io%2Findex.html"
-                target="_blank">HTML5 ✓</a>
-            <a href="https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fdaniel-gorcica.github.io&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=cs"
-                target="_blank">CSS3 ✓</a>
-            <a href="AI_Citace.md">AI CITACE</a>
+            <span>HTML5 ✓</span>
+            <span>CSS3 ✓</span>
+            <a href="AI-Citace.md">AI CITACE</a>
         </div>
     </footer>
 
     <script>
-        // === 0. PŘIDÁNÍ TŘÍDY .js NA <html> (pro fade-up animace) ===
         document.documentElement.classList.add('js');
 
-        // === 1. OTEVŘENÍ / ZAVŘENÍ MOBILNÍHO MENU ===
         const header = document.querySelector('.site-header');
         const toggle = document.querySelector('.menu-toggle');
 
@@ -417,12 +431,10 @@
         document.querySelectorAll('#hlavni-menu a').forEach(a => a.addEventListener('click', () => setMenu(false)));
         document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
 
-        // === 2. HLAVIČKA PŘI SCROLLU ===
         window.addEventListener('scroll', () => {
             header.classList.toggle('scrolled', window.scrollY > 50);
         });
 
-        // === 3. AKTIVNÍ ODKAZ V MENU ===
         const sections = document.querySelectorAll('main > section[id], main > div[id]');
         const navLinks = document.querySelectorAll('#hlavni-menu a');
 
@@ -441,7 +453,6 @@
 
         sections.forEach(section => sectionObserver.observe(section));
 
-        // === 4. POČÍTADLO NÁVŠTĚV ===
         async function loadVisitorCount() {
             const el = document.getElementById('visitor-count');
             if (!el) return;
@@ -465,7 +476,6 @@
         }
         loadVisitorCount();
 
-        // === 5. FADE-UP ANIMACE PŘI SCROLLU ===
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {

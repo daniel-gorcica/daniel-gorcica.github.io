@@ -1,0 +1,74 @@
+@charset "UTF-8";
+
+/* === SCROLL ANIMACE ===
+   Moderní CSS vlastnosti (2023+), které W3C validátor zatím nezná.
+   Proto jsou v samostatném souboru. Vše funguje v Chrome, Edge, Safari. */
+
+/* Scroll progress bar – roste podle scrollu */
+.scroll-progress {
+    animation:
+        scroll-grow linear both,
+        scroll-shine 3s linear infinite;
+    animation-timeline: scroll(root), auto;
+}
+
+@keyframes scroll-grow {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes scroll-shine {
+    from {
+        background-position: 0% 0%;
+    }
+
+    to {
+        background-position: 200% 0%;
+    }
+}
+
+/* Slunce a měsíc se hýbou podle scrollu */
+@keyframes sun-scroll {
+    from {
+        opacity: 1;
+        transform: translate(-50%, 0) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translate(-50%, 140px) scale(0.6);
+    }
+}
+
+@keyframes moon-scroll {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -140px) scale(0.6);
+        box-shadow: 0 0 0px rgba(216, 217, 232, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0) scale(1);
+        box-shadow: 0 0 12px rgba(216, 217, 232, 0.25);
+    }
+}
+
+@supports (animation-timeline: scroll()) {
+    .sunset-sun {
+        animation: sun-scroll linear both;
+        animation-timeline: scroll(root);
+        animation-range: 0px 600px;
+    }
+
+    .moon {
+        animation: moon-scroll linear both;
+        animation-timeline: scroll(root);
+        animation-range: 500px 1200px;
+    }
+}
