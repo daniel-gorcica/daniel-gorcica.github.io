@@ -1,36 +1,43 @@
-# AI Citace a prohlášení o použití umělé inteligence
+# AI Citace
 
-Tento projekt využil nástroje generativní umělé inteligence jako pomocný nástroj při vývoji a tvorbě obsahu.
+## Informace o projektu
+
+- **Projekt:** Osobní portfolio vývojáře
+- **URL:** https://daniel-gorcica.github.io/
+- **Autor:** Daniel Gorčica
+- **Datum vytvoření:** 2026
+- **Typ projektu:** Osobní webové portfolio (HTML, CSS, JavaScript)
+
+## Použité AI nástroje
+
+### Claude (Anthropic)
+- **Verze:** Claude Sonnet 4.5
+- **URL:** https://claude.ai
+- **Datum použití:** 2026
+- **Rozsah použití:**
+  - Konzultace struktury HTML a sémantiky
+  - Pomoc s pokročilými CSS technikami (grid, animace, `animation-timeline`)
+  - Návrh a ladění JavaScriptu (IntersectionObserver, scroll efekty)
+  - Vysvětlení jednotlivých vlastností a postupů
+  - Code review a návrhy na vylepšení
+  - Tvorba SVG pixel-artového avatara
+
+## Co jsem vytvořil sám
+
+- **Vizuální koncept a design** – celý nápad „gaming/retro" portfolia, barevná paleta, rozvržení
+- **Struktura obsahu** – texty, popisky, sekce (O mně, Projekty, FAQ, Kontakt)
+- **Pixel-art avatar** – vlastní návrh postavy v SVG
+- **Vlastní projekty** – Real Madrid web a Rocket League web (viz. jejich vlastní citace)
+- **Finální úpravy a doladění** – všechny texty, barvy a detaily
+
+## Rozsah AI asistence
+
+AI bylo použito jako **konzultační a vzdělávací nástroj** – pomáhalo s vysvětlením postupů, návrhem řešení a kontrolou kódu. Veškeré finální úpravy, designová rozhodnutí a obsah projektu jsou vlastní prací autora.
+
+## Prohlášení
+
+Tento projekt vznikl za podpory AI nástroje **Claude (Anthropic)**. AI nebylo použito k vytvoření finálního díla jako celku, ale jako nástroj pro učení, konzultaci a kontrolu kvality kódu.
 
 ---
 
-## 1. Použité nástroje AI
-* ChatGPT / Gemini / Claude
-* GitHub Copilot
-
----
-
-## 2. Rozsah zapojení AI a příklady promptů
-
-### 💻 Kód a vývoj (HTML / CSS / JS)
-* **Konzultace a refaktoring:** Konzultace sémantické struktury HTML5 a ladění CSS stylů.
-  * *Příklad promptu:* „Mám v patičce text 'Made with ♥ and Coffee'. Jak upravit HTML, aby patička obsahovala pouze autorská práva a odkazy na validátory?“
-* **Oprava chyb (Debugging):** Pomoc při odhalování a opravě chyb v kódování a responzivitě.
-  * *Příklad promptu:* „Zkontroluj tento kód v CSS a porad mi, proč se mi tlačítko v mobilním zobrazení překrývá s textem.“
-* **Responzivita na mobilu:** Kontrola celého CSS a HTML, protože se web na mobilu rozpadal (přetékající prvky, hlavička, patička) a CSS hlásilo chyby. AI navrhla media queries pro tablet a mobil a opravy přetékajících prvků.
-  * *Příklad promptu:* „Na mobilu mi responzivita trochu blbne a je to strašné, také CSS hází chyby, tak se na to podívej.“
-* **Hamburger menu a úprava prvků:** Vrácení hamburger menu na mobilu (rozbalovací navigace s tlačítkem) a zvětšení symbolu ∞ ve statistikách, aby odpovídal velikosti ostatních čísel.
-  * *Příklad promptu:* „V menu jsem měl hamburger, tak ho tam pěkně vrať, a to nekonečno, co tam mám, udělej větší jako ty vedle.“
-* **Optimalizace:** Návrhy na přístupnost (ARIA atributy) a čistotu kódu.
-  * *Příklad promptu:* „Jaké ARIA atributy bych měl přidat k navigaci a ikonám v HTML pro lepší přístupnost?“
-
-### 📝 Textový obsah a dokumentace
-* **Korektura a úprava textů:** Úprava a stylistická korektura formulací v sekcích O mně a popiscích projektů.
-  * *Příklad promptu:* „Přeformuluj tento text o mně, aby působil profesionálně, ale zároveň úderně pro herní styl portfolia.“
-* **Dokumentace:** Generování prohlášení o použití AI.
-  * *Příklad promptu:* „Vytvoř soubor AI-CITACE.md v Markdownu s přehledem použitých promptů pro školní projekt.“
-
----
-
-## 3. Prohlášení autora
-Veškeré návrhy a kód vygenerovaný umělou inteligencí byly autorem zkontrolovány, pochopeny, přizpůsobeny a ručně zapracovány do finální podoby webu. Vizuální koncept, struktura a finální implementace jsou výsledkem vlastní práce.
+*Datum vytvoření citace: 16. 10. 2026*
