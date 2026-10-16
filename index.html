@@ -40,7 +40,11 @@
 
     <header class="site-header">
         <a class="logo" href="#domu">MENU</a>
-        <nav>
+        <button class="menu-toggle" type="button" aria-label="Otevřít menu" aria-expanded="false"
+            aria-controls="hlavni-menu">
+            <span></span><span></span><span></span>
+        </button>
+        <nav id="hlavni-menu" aria-label="Hlavní navigace">
             <a href="#domu">ÚVOD</a>
             <a href="#o-mne">O MNĚ</a>
             <a href="#projekty">PROJEKTY</a>
@@ -204,7 +208,7 @@
         <div class="stats">
             <div><strong>03</strong><span>LET ZKUŠENOSTÍ</span></div>
             <div><strong>02</strong><span>DOKONČENÉ PROJEKTY</span></div>
-            <div><strong>∞</strong><span>CHUTI TVOŘIT</span></div>
+            <div><strong class="infinity">∞</strong><span>CHUTI TVOŘIT</span></div>
         </div>
 
         <section class="content-section" id="o-mne">
@@ -289,6 +293,21 @@
             <a href="AI_Citace.md">AI CITACE</a>
         </div>
     </footer>
+
+    <script>
+        const header = document.querySelector('.site-header');
+        const toggle = document.querySelector('.menu-toggle');
+
+        function setMenu(open) {
+            header.classList.toggle('nav-open', open);
+            toggle.setAttribute('aria-expanded', open);
+            toggle.setAttribute('aria-label', open ? 'Zavřít menu' : 'Otevřít menu');
+        }
+
+        toggle.addEventListener('click', () => setMenu(!header.classList.contains('nav-open')));
+        document.querySelectorAll('#hlavni-menu a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+    </script>
 
 </body>
 

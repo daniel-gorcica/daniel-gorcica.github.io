@@ -19,6 +19,7 @@
 
 html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -27,6 +28,7 @@ body {
     background: radial-gradient(circle at top, #25294d, transparent 45%), var(--background);
     font-family: var(--body-font);
     line-height: 1.6;
+    overflow-x: clip;
 }
 
 a {
@@ -45,7 +47,7 @@ footer {
     position: fixed;
     top: 0;
     left: 50%;
-    z-index: 10;
+    z-index: 2;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -53,6 +55,7 @@ footer {
     padding: 0 20px;
     transform: translateX(-50%);
     background: rgba(13, 16, 32, .94);
+    -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
 }
 
@@ -98,9 +101,48 @@ nav a:hover {
     color: var(--yellow);
 }
 
+/* Hamburger (na desktopu skrytý) */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 0 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--card);
+    cursor: pointer;
+}
+
+.menu-toggle:hover,
+.menu-toggle:focus-visible {
+    border-color: var(--pink);
+}
+
+.menu-toggle span {
+    display: block;
+    height: 3px;
+    background: var(--yellow);
+    transition: transform .2s ease, opacity .2s ease;
+}
+
+.nav-open .menu-toggle span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.nav-open .menu-toggle span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-open .menu-toggle span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
 .hero {
     display: grid;
-    grid-template-columns: 1fr 350px;
+    grid-template-columns: minmax(0, 1fr) 350px;
     align-items: center;
     gap: 70px;
     padding: 80px 0;
@@ -125,7 +167,7 @@ nav a:hover {
 
 h1 {
     margin: 0 0 24px;
-    font-size: clamp(30px, 6vw, 58px);
+    font-size: clamp(26px, 5.2vw, 58px);
     line-height: 1.25;
 }
 
@@ -279,6 +321,11 @@ h1 {
     font-size: 22px;
 }
 
+.stats strong.infinity {
+    font-size: 1.8em;
+    line-height: .89;
+}
+
 .stats span {
     display: block;
     margin-top: 8px;
@@ -309,7 +356,7 @@ h1 {
 
 .about-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 50px;
 }
 
@@ -485,6 +532,7 @@ h1 {
 }
 
 .contact-section {
+    scroll-margin-top: 90px;
     margin: 100px 0 70px;
     padding: 55px 20px;
     border: 1px solid var(--pink);
@@ -582,10 +630,6 @@ main,
 footer {
     position: relative;
     z-index: 1;
-}
-
-.site-header {
-    z-index: 2;
 }
 
 @keyframes sun-scroll {
@@ -731,5 +775,232 @@ footer {
     50% {
         opacity: 1;
         transform: scale(1.4);
+    }
+}
+
+/* ============================================================
+   RESPONZIVITA
+   ============================================================ */
+
+/* Tablet / užší notebook: hero pod sebe */
+@media (max-width: 1000px) {
+    .hero {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 40px;
+        padding: 50px 0 60px;
+    }
+
+    .avatar-box {
+        width: 100%;
+        max-width: 350px;
+        margin: 0 auto;
+    }
+}
+
+/* Mobil */
+@media (max-width: 760px) {
+
+    .site-header,
+    main,
+    footer {
+        width: calc(100% - 28px);
+    }
+
+    /* hlavička: logo nahoře, menu pod ním přes celou šířku */
+    .site-header {
+        min-height: 64px;
+        padding: 0 14px;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    /* menu se rozbalí pod hlavičkou */
+    nav {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        padding: 4px 14px 8px;
+        border: 1px solid var(--border);
+        border-top: 0;
+        border-radius: 0 0 12px 12px;
+        background: rgba(13, 16, 32, .98);
+        font-size: 12px;
+    }
+
+    .nav-open nav {
+        display: flex;
+    }
+
+    nav a {
+        padding: 14px 0;
+        border-bottom: 1px solid var(--border);
+    }
+
+    nav a:last-child {
+        border-bottom: 0;
+    }
+
+    main {
+        padding-top: 72px;
+    }
+
+    .contact-section {
+        scroll-margin-top: 72px;
+    }
+
+    /* hero */
+    .hero {
+        gap: 36px;
+        padding: 36px 0 50px;
+    }
+
+    .eyebrow {
+        margin-bottom: 16px;
+        font-size: 10px;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+        font-size: clamp(24px, 8vw, 40px);
+    }
+
+    .intro {
+        font-size: 17px;
+    }
+
+    .hero-actions {
+        flex-wrap: wrap;
+    }
+
+    .avatar-screen {
+        height: 240px;
+    }
+
+    /* statistiky */
+    .stats {
+        gap: 6px;
+        padding: 18px 6px;
+    }
+
+    .stats>div {
+        flex: 1;
+    }
+
+    .stats strong {
+        font-size: 18px;
+    }
+
+    .stats span {
+        line-height: 1.6;
+    }
+
+    /* sekce */
+    .content-section {
+        padding-top: 80px;
+    }
+
+    .section-heading {
+        flex-wrap: wrap;
+        gap: 6px 12px;
+        margin-bottom: 22px;
+    }
+
+    .section-heading h2 {
+        font-size: 14px;
+    }
+
+    .about-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 30px;
+    }
+
+    .large-copy {
+        font-size: 20px;
+    }
+
+    .skill-panel {
+        padding: 18px;
+    }
+
+    /* tooltip se musí zalamovat, jinak vyjede z obrazovky a vytvoří vodorovný posun */
+    .skill-item::after {
+        width: max-content;
+        max-width: min(240px, 70vw);
+        font-size: 8px;
+        line-height: 1.7;
+        text-align: center;
+        white-space: normal;
+    }
+
+    /* projekty */
+    .project-grid {
+        grid-template-columns: minmax(0, 1fr);
+        max-width: 480px;
+        margin: 0 auto;
+    }
+
+    .project-art {
+        height: 160px;
+    }
+
+    .project-art span {
+        font-size: 48px;
+    }
+
+    /* kontakt */
+    .contact-section {
+        margin: 70px 0 50px;
+        padding: 40px 14px;
+    }
+
+    .contact-section h2 {
+        font-size: clamp(15px, 4.8vw, 22px);
+        line-height: 1.5;
+    }
+
+    /* patička */
+    footer {
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+        font-size: 9px;
+        line-height: 1.8;
+        text-align: center;
+    }
+
+    .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+/* Úplně malé displeje */
+@media (max-width: 380px) {
+    .stats span {
+        font-size: 7px;
+    }
+}
+
+/* Uživatelé, kterým vadí animace */
+@media (prefers-reduced-motion: reduce) {
+
+    .blink,
+    .pixel-avatar,
+    .pixel-star {
+        animation: none;
+    }
+
+    .pixel-star {
+        opacity: .6;
+    }
+
+    html {
+        scroll-behavior: auto;
     }
 }

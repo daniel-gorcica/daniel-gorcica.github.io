@@ -17,6 +17,10 @@ Tento projekt využil nástroje generativní umělé inteligence jako pomocný n
   * *Příklad promptu:* „Mám v patičce text 'Made with ♥ and Coffee'. Jak upravit HTML, aby patička obsahovala pouze autorská práva a odkazy na validátory?“
 * **Oprava chyb (Debugging):** Pomoc při odhalování a opravě chyb v kódování a responzivitě.
   * *Příklad promptu:* „Zkontroluj tento kód v CSS a porad mi, proč se mi tlačítko v mobilním zobrazení překrývá s textem.“
+* **Responzivita na mobilu:** Kontrola celého CSS a HTML, protože se web na mobilu rozpadal (přetékající prvky, hlavička, patička) a CSS hlásilo chyby. AI navrhla media queries pro tablet a mobil a opravy přetékajících prvků.
+  * *Příklad promptu:* „Na mobilu mi responzivita trochu blbne a je to strašné, také CSS hází chyby, tak se na to podívej.“
+* **Hamburger menu a úprava prvků:** Vrácení hamburger menu na mobilu (rozbalovací navigace s tlačítkem) a zvětšení symbolu ∞ ve statistikách, aby odpovídal velikosti ostatních čísel.
+  * *Příklad promptu:* „V menu jsem měl hamburger, tak ho tam pěkně vrať, a to nekonečno, co tam mám, udělej větší jako ty vedle.“
 * **Optimalizace:** Návrhy na přístupnost (ARIA atributy) a čistotu kódu.
   * *Příklad promptu:* „Jaké ARIA atributy bych měl přidat k navigaci a ikonám v HTML pro lepší přístupnost?“
 
