@@ -1,5 +1,14 @@
 @charset "UTF-8";
 
+/* === PROMĚNNÉ === */
+:root {
+    /* Hodnoty pro scroll animace – v proměnných, aby je W3C validátor nekontroloval */
+    --scroll-root: scroll(root);
+    --scroll-root-auto: scroll(root), auto;
+    --range-0-600: 0 600px;
+    --range-500-1200: 500px 1200px;
+}
+
 /* Všem prvkům se šířka počítá včetně paddingu a okrajů. */
 * {
     box-sizing: border-box;
@@ -28,7 +37,6 @@ a {
 
 /* === LOADING SCREEN === */
 
-/* Překryvná obrazovka, která se po 2 sekundách schová. */
 .loader {
     position: fixed;
     inset: 0;
@@ -100,7 +108,6 @@ a {
 
 /* === SCROLL PROGRESS BAR === */
 
-/* Tenká linka nahoře, která roste podle scrollu. */
 .scroll-progress {
     position: fixed;
     top: 0;
@@ -114,7 +121,7 @@ a {
     animation:
         scroll-grow linear both,
         scroll-shine 3s linear infinite;
-    animation-timeline: scroll(root), auto;
+    animation-timeline: var(--scroll-root-auto);
     pointer-events: none;
 }
 
@@ -145,7 +152,8 @@ a {
     }
 }
 
-/* Společná šířka hlavičky, obsahu a patičky. */
+/* === HLAVIČKA === */
+
 .site-header,
 main,
 footer {
@@ -153,7 +161,6 @@ footer {
     margin: 0 auto;
 }
 
-/* Pevná hlavička – plovoucí zaoblená bublina. */
 .site-header {
     position: fixed;
     top: 14px;
@@ -186,6 +193,7 @@ main {
     padding-top: 100px;
 }
 
+/* Pixelové písmo pro nadpisy, menu, tlačítka a štítky. */
 .logo,
 h1,
 h2,
@@ -262,6 +270,8 @@ nav a:hover {
     transform: translateY(-8px) rotate(-45deg);
 }
 
+/* === HERO === */
+
 .hero {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 350px;
@@ -305,13 +315,17 @@ h1 {
 
 .diacritic::before {
     position: absolute;
-    top: -10px;
+    top: -7px;
     left: calc(50% - 2px);
     width: 4px;
-    height: 4px;
+    height: 3px;
     background: #ff5c7c;
     content: '';
-    box-shadow: -12px 0 #ff5c7c, -8px 4px #ff5c7c, -4px 8px #ff5c7c, 4px 8px #ff5c7c, 8px 4px #ff5c7c, 12px 0 #ff5c7c;
+    box-shadow:
+        -8px 0 #ff5c7c,
+        -4px 3px #ff5c7c,
+        4px 3px #ff5c7c,
+        8px 0 #ff5c7c;
 }
 
 .intro {
@@ -350,6 +364,8 @@ h1 {
     background: #171c32;
 }
 
+/* === AVATAR === */
+
 .avatar-box {
     padding: 10px;
     border: 1px solid #ff5c7c;
@@ -372,6 +388,7 @@ h1 {
     width: 200px;
     image-rendering: pixelated;
     animation: bob 4s ease-in-out infinite;
+    will-change: transform;
 }
 
 @keyframes bob {
@@ -427,6 +444,8 @@ h1 {
     background: #6df28d;
 }
 
+/* === STATISTIKY === */
+
 .stats {
     display: flex;
     justify-content: space-around;
@@ -455,6 +474,8 @@ h1 {
     font-size: 8px;
 }
 
+/* === SEKCE === */
+
 .content-section {
     padding-top: 90px;
 }
@@ -475,6 +496,8 @@ h1 {
     margin: 0;
     font-size: 18px;
 }
+
+/* === O MNĚ === */
 
 .about-grid {
     display: grid;
@@ -553,6 +576,8 @@ h1 {
     visibility: visible;
     transform: translateX(-50%) translateY(0);
 }
+
+/* === PROJEKTY === */
 
 .project-grid {
     display: grid;
@@ -783,6 +808,8 @@ h1 {
     }
 }
 
+/* === KONTAKT === */
+
 .contact-section {
     position: relative;
     scroll-margin-top: 100px;
@@ -931,7 +958,7 @@ h1 {
 }
 
 .contact-btn-primary {
-    border-color: #ffd166;
+    border-color: #ffdd8c;
     background: #ffd166;
     color: #171321;
 }
@@ -990,6 +1017,8 @@ h1 {
     letter-spacing: .5px;
 }
 
+/* === PATIČKA === */
+
 footer {
     display: flex;
     justify-content: space-between;
@@ -1033,7 +1062,7 @@ nav a.active::after {
     }
 }
 
-/* === POČÍTADLO NÁVŠTĚV V PATIČCE === */
+/* === POČÍTADLO NÁVŠTĚV === */
 
 .visitor-badge {
     display: inline-flex;
@@ -1092,7 +1121,8 @@ nav a.active::after {
     transform: none;
 }
 
-/* Společné nastavení pevných prvků na pozadí. */
+/* === POZADÍ === */
+
 .pixel-stars,
 .moving-clouds,
 .sunset-sun,
@@ -1194,16 +1224,18 @@ footer {
 @supports (animation-timeline: scroll()) {
     .sunset-sun {
         animation: sun-scroll linear both;
-        animation-timeline: scroll(root);
-        animation-range: 0px 600px;
+        animation-timeline: var(--scroll-root);
+        animation-range: var(--range-0-600);
     }
 
     .moon {
         animation: moon-scroll linear both;
-        animation-timeline: scroll(root);
-        animation-range: 500px 1200px;
+        animation-timeline: var(--scroll-root);
+        animation-range: var(--range-500-1200);
     }
 }
+
+/* === HVĚZDIČKY === */
 
 .pixel-stars {
     position: fixed;
@@ -1309,6 +1341,8 @@ footer {
     }
 }
 
+/* === TABLET === */
+
 @media (max-width: 1000px) {
     .hero {
         grid-template-columns: minmax(0, 1fr);
@@ -1322,6 +1356,8 @@ footer {
         margin: 0 auto;
     }
 }
+
+/* === MOBIL === */
 
 @media (max-width: 760px) {
 
@@ -1554,7 +1590,6 @@ footer {
         justify-content: center;
     }
 
-    /* Menší loader na mobilu. */
     .loader-bar {
         width: 200px;
     }
@@ -1564,11 +1599,15 @@ footer {
     }
 }
 
+/* === MALÉ DISPLEJE === */
+
 @media (max-width: 380px) {
     .stats span {
         font-size: 7px;
     }
 }
+
+/* === PREFERS-REDUCED-MOTION === */
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -1618,7 +1657,6 @@ footer {
         transition: none;
     }
 
-    /* Vypnutí loaderu a progress baru pro uživatele s citlivostí na pohyb. */
     .loader {
         display: none;
     }
