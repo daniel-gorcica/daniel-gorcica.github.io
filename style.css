@@ -26,6 +26,125 @@ a {
     text-decoration: none;
 }
 
+/* === LOADING SCREEN === */
+
+/* Překryvná obrazovka, která se po 2 sekundách schová. */
+.loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: grid;
+    place-items: center;
+    background: #0d1020;
+    animation: loader-hide .5s ease 2s forwards;
+    pointer-events: none;
+}
+
+@keyframes loader-hide {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    font-family: 'Press Start 2P', monospace;
+    text-align: center;
+}
+
+.loader-text {
+    margin: 0;
+    color: #ff5c7c;
+    font-size: 14px;
+    letter-spacing: 2px;
+    animation: blink 1.2s steps(2) infinite;
+}
+
+.loader-bar {
+    position: relative;
+    width: 260px;
+    height: 18px;
+    padding: 3px;
+    border: 1px solid #ffd166;
+    border-radius: 4px;
+    background: #171c32;
+}
+
+.loader-fill {
+    height: 100%;
+    background: linear-gradient(to right, #ff5c7c, #ffd166);
+    animation: loader-fill 2s steps(20) forwards;
+    box-shadow: 0 0 12px rgba(255, 92, 124, .6);
+}
+
+@keyframes loader-fill {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+.loader-percent {
+    margin: 0;
+    color: #ffd166;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+/* === SCROLL PROGRESS BAR === */
+
+/* Tenká linka nahoře, která roste podle scrollu. */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(to right, #ff5c7c, #ffd166, #ff5c7c);
+    background-size: 200% 100%;
+    box-shadow: 0 0 10px rgba(255, 92, 124, .7);
+    animation:
+        scroll-grow linear both,
+        scroll-shine 3s linear infinite;
+    animation-timeline: scroll(root), auto;
+    pointer-events: none;
+}
+
+@keyframes scroll-grow {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes scroll-shine {
+    from {
+        background-position: 0% 0%;
+    }
+
+    to {
+        background-position: 200% 0%;
+    }
+}
+
+/* Pro prohlížeče bez animation-timeline – linka se nezobrazí. */
+@supports not (animation-timeline: scroll()) {
+    .scroll-progress {
+        display: none;
+    }
+}
+
 /* Společná šířka hlavičky, obsahu a patičky. */
 .site-header,
 main,
@@ -55,7 +174,6 @@ footer {
         box-shadow .35s ease;
 }
 
-/* Po scrollu se hlavička změní v tmavou bublinu. */
 .site-header.scrolled {
     background: rgba(13, 16, 32, .94);
     backdrop-filter: blur(10px);
@@ -64,12 +182,10 @@ footer {
         0 0 0 1px rgba(255, 92, 124, .18);
 }
 
-/* Odsazení obsahu pod plovoucí hlavičku. */
 main {
     padding-top: 100px;
 }
 
-/* Pixelové písmo pro nadpisy, menu, tlačítka a štítky. */
 .logo,
 h1,
 h2,
@@ -87,32 +203,27 @@ footer {
     font-family: 'Press Start 2P', monospace;
 }
 
-/* Žluté logo. */
 .logo {
     color: #ffd166;
     font-size: 14px;
 }
 
-/* Růžový zvýrazněný text. */
 .logo span,
 .accent {
     color: #ff5c7c;
 }
 
-/* Menu s odkazy vedle sebe. */
 nav {
     display: flex;
-    gap: 30px;
+    gap: 26px;
     color: #adb5d0;
     font-size: 12px;
 }
 
-/* Odkaz v menu po najetí zežloutne. */
 nav a:hover {
     color: #ffd166;
 }
 
-/* Tlačítko hamburgeru, na počítači je skryté. */
 .menu-toggle {
     display: none;
     flex-direction: column;
@@ -127,13 +238,11 @@ nav a:hover {
     cursor: pointer;
 }
 
-/* Hamburger dostane růžový okraj po najetí nebo zaostření. */
 .menu-toggle:hover,
 .menu-toggle:focus-visible {
     border-color: #ff5c7c;
 }
 
-/* Jeden proužek hamburgeru. */
 .menu-toggle span {
     display: block;
     height: 3px;
@@ -141,22 +250,18 @@ nav a:hover {
     transition: transform .2s ease, opacity .2s ease;
 }
 
-/* Horní proužek se po otevření menu otočí do X. */
 .nav-open .menu-toggle span:nth-child(1) {
     transform: translateY(8px) rotate(45deg);
 }
 
-/* Prostřední proužek po otevření menu zmizí. */
 .nav-open .menu-toggle span:nth-child(2) {
     opacity: 0;
 }
 
-/* Spodní proužek se po otevření menu otočí do X. */
 .nav-open .menu-toggle span:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
 }
 
-/* Úvodní sekce s textem vlevo a avatarem vpravo. */
 .hero {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 350px;
@@ -165,7 +270,6 @@ nav a:hover {
     padding: 80px 0;
 }
 
-/* Malý růžový text nad nadpisem. */
 .eyebrow {
     display: inline-block;
     margin: 0 0 20px;
@@ -173,38 +277,32 @@ nav a:hover {
     font-size: 13px;
 }
 
-/* Zapíná blikání textu. */
 .blink {
     animation: blink 1.5s steps(2) infinite;
 }
 
-/* Animace blikání. */
 @keyframes blink {
     50% {
         opacity: .45;
     }
 }
 
-/* Hlavní nadpis s pružnou velikostí písma. */
 h1 {
     margin: 0 0 24px;
     font-size: clamp(26px, 5.2vw, 58px);
     line-height: 1.25;
 }
 
-/* Obrysové písmo bez výplně. */
 .outline {
     color: transparent;
     -webkit-text-stroke: 1px #ff5c7c;
 }
 
-/* Základ pro nakreslený háček nad písmenem. */
 .diacritic {
     position: relative;
     display: inline-block;
 }
 
-/* Pixelový háček nad písmenem. */
 .diacritic::before {
     position: absolute;
     top: -10px;
@@ -216,7 +314,6 @@ h1 {
     box-shadow: -12px 0 #ff5c7c, -8px 4px #ff5c7c, -4px 8px #ff5c7c, 4px 8px #ff5c7c, 8px 4px #ff5c7c, 12px 0 #ff5c7c;
 }
 
-/* Úvodní odstavec se žlutým pruhem vlevo. */
 .intro {
     max-width: 540px;
     margin: 0;
@@ -226,14 +323,12 @@ h1 {
     font-size: 19px;
 }
 
-/* Řada tlačítek v úvodu. */
 .hero-actions {
     display: flex;
     gap: 14px;
     margin-top: 28px;
 }
 
-/* Žluté pixelové tlačítko. */
 .button {
     display: inline-block;
     padding: 13px 17px;
@@ -245,19 +340,16 @@ h1 {
     transition: transform .2s;
 }
 
-/* Tlačítko se po najetí mírně zvedne. */
 .button:hover {
     transform: translateY(-2px);
 }
 
-/* Tmavá varianta tlačítka. */
 .button-secondary {
     color: #f7f7ff;
     border-color: #303958;
     background: #171c32;
 }
 
-/* Rámeček kolem avatara. */
 .avatar-box {
     padding: 10px;
     border: 1px solid #ff5c7c;
@@ -265,7 +357,6 @@ h1 {
     background: #171c32;
 }
 
-/* Obrazovka, ve které je avatar. */
 .avatar-screen {
     position: relative;
     display: grid;
@@ -277,14 +368,12 @@ h1 {
     background: #251b42;
 }
 
-/* Pixelový avatar, který se jemně houpe. */
 .pixel-avatar {
     width: 200px;
     image-rendering: pixelated;
     animation: bob 4s ease-in-out infinite;
 }
 
-/* Animace houpání nahoru a dolů. */
 @keyframes bob {
 
     0%,
@@ -297,45 +386,38 @@ h1 {
     }
 }
 
-/* Žlutá křížková značka v rozích obrazovky. */
 .corner {
     position: absolute;
     color: #ffd166;
     font-size: 22px;
 }
 
-/* Značka v levém horním rohu. */
 .top-left {
     top: 8px;
     left: 12px;
 }
 
-/* Značka v pravém horním rohu. */
 .top-right {
     top: 8px;
     right: 12px;
 }
 
-/* Značka v levém dolním rohu. */
 .bottom-left {
     bottom: 8px;
     left: 12px;
 }
 
-/* Značka v pravém dolním rohu. */
 .bottom-right {
     right: 12px;
     bottom: 8px;
 }
 
-/* Stavový text pod avatarem. */
 .avatar-status {
     padding: 12px 4px 2px;
     color: #ffd166;
     font-size: 10px;
 }
 
-/* Zelená tečka „online“. */
 .status-dot {
     display: inline-block;
     width: 10px;
@@ -345,7 +427,6 @@ h1 {
     background: #6df28d;
 }
 
-/* Panel se statistikami. */
 .stats {
     display: flex;
     justify-content: space-around;
@@ -356,20 +437,17 @@ h1 {
     text-align: center;
 }
 
-/* Velká růžová čísla. */
 .stats strong {
     display: block;
     color: #ff5c7c;
     font-size: 22px;
 }
 
-/* Zvětšený symbol nekonečna. */
 .stats strong.infinity {
     font-size: 1.8em;
     line-height: .89;
 }
 
-/* Malé popisky pod čísly. */
 .stats span {
     display: block;
     margin-top: 8px;
@@ -377,12 +455,10 @@ h1 {
     font-size: 8px;
 }
 
-/* Odsazení nad každou sekcí. */
 .content-section {
     padding-top: 90px;
 }
 
-/* Nadpis sekce s číslem. */
 .section-heading {
     display: flex;
     align-items: center;
@@ -390,38 +466,32 @@ h1 {
     margin-bottom: 30px;
 }
 
-/* Růžové číslo sekce. */
 .section-heading span {
     color: #ff5c7c;
     font-size: 11px;
 }
 
-/* Název sekce. */
 .section-heading h2 {
     margin: 0;
     font-size: 18px;
 }
 
-/* Dva sloupce v sekci O mně. */
 .about-grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 50px;
 }
 
-/* Velký úvodní odstavec. */
 .large-copy {
     margin: 0;
     color: #adb5d0;
     font-size: 25px;
 }
 
-/* Šedé odstavce textu. */
 .about-copy p {
     color: #adb5d0;
 }
 
-/* Karta s dovednostmi. */
 .skill-panel {
     padding: 24px;
     border: 1px solid #303958;
@@ -429,21 +499,18 @@ h1 {
     background: #171c32;
 }
 
-/* Růžový nadpis karty. */
 .panel-label {
     margin: 0;
     color: #ff5c7c;
     font-size: 10px;
 }
 
-/* Seznam dovedností bez odrážek. */
 .skills {
     padding: 0;
     margin: 20px 0 0;
     list-style: none;
 }
 
-/* Jedna dovednost oddělená čarou. */
 .skills li {
     display: flex;
     justify-content: space-between;
@@ -452,17 +519,14 @@ h1 {
     position: relative;
 }
 
-/* Žlutý ukazatel úrovně dovednosti. */
 .skills b {
     color: #ffd166;
 }
 
-/* Základ pro umístění tooltipu. */
 .skill-item {
     position: relative;
 }
 
-/* Tooltip s popiskem dovednosti, zpočátku skrytý. */
 .skill-item::after {
     content: attr(data-tooltip);
     position: absolute;
@@ -484,14 +548,12 @@ h1 {
     z-index: 20;
 }
 
-/* Tooltip se po najetí zobrazí. */
 .skill-item:hover::after {
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%) translateY(0);
 }
 
-/* Mřížka s projekty. */
 .project-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 390px));
@@ -499,7 +561,6 @@ h1 {
     gap: 24px;
 }
 
-/* Karta projektu, která je celá odkazem. */
 .project-card {
     display: block;
     text-decoration: none;
@@ -513,14 +574,12 @@ h1 {
     transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.35s cubic-bezier(.2, .7, .3, 1);
 }
 
-/* Karta po najetí růžově září a mírně se nadzvedne. */
 .project-card:hover {
     border-color: #ff5c7c;
     box-shadow: 0 0 25px rgba(255, 92, 124, 0.4), inset 0 0 15px rgba(255, 92, 124, 0.15), 0 20px 40px rgba(0, 0, 0, .35);
     transform: translateY(-6px);
 }
 
-/* Číslo projektu v rohu karty. */
 .project-number {
     position: absolute;
     z-index: 3;
@@ -529,7 +588,6 @@ h1 {
     font-size: 10px;
 }
 
-/* Plocha s obrázkem v horní části karty. */
 .project-art {
     position: relative;
     display: grid;
@@ -540,7 +598,6 @@ h1 {
     isolation: isolate;
 }
 
-/* Obrázek jako pozadí – celý viditelný, vycentrovaný. */
 .project-art::before {
     content: '';
     position: absolute;
@@ -551,11 +608,9 @@ h1 {
     background-position: center;
     background-repeat: no-repeat;
     filter: brightness(.85) saturate(1.1);
-    transition: transform 0.6s cubic-bezier(.2, .7, .3, 1),
-        filter 0.4s ease;
+    transition: transform 0.6s cubic-bezier(.2, .7, .3, 1), filter 0.4s ease;
 }
 
-/* Tmavý overlay nad obrázkem, aby byl text čitelný. */
 .project-art::after {
     content: '';
     position: absolute;
@@ -566,78 +621,64 @@ h1 {
     transition: background 0.4s ease;
 }
 
-/* Obsah plochy leží nad obrázkem i overlayem. */
 .project-art span,
 .project-art i {
     position: relative;
     z-index: 2;
 }
 
-/* Velký symbol projektu. */
 .project-art span {
     display: block;
     font-size: 60px;
-    transition: transform 0.45s cubic-bezier(.2, .7, .3, 1),
-        color 0.3s ease;
+    transition: transform 0.45s cubic-bezier(.2, .7, .3, 1), color 0.3s ease;
 }
 
-/* Název pod symbolem. */
 .project-art i {
     font-size: 11px;
     font-style: normal;
     transition: letter-spacing 0.4s ease;
 }
 
-/* Po najetí na kartu se obrázek jemně přiblíží a rozzáří. */
 .project-card:hover .project-art::before {
     transform: scale(1.12);
     filter: brightness(1.15) saturate(1.35);
 }
 
-/* Overlay se po najetí trochu prosvětlí. */
 .project-card:hover .project-art::after {
     background: linear-gradient(rgba(13, 16, 32, .1), rgba(255, 92, 124, .25));
 }
 
-/* Symbol se otočí, zvětší a zežloutne. */
 .project-card:hover .project-art span {
     transform: scale(1.2) rotate(15deg);
     color: #ffd166;
 }
 
-/* Název pod symbolem dostane jemný rozestup. */
 .project-card:hover .project-art i {
     letter-spacing: 2px;
 }
 
-/* Karmínová barva jako záloha pro první projekt. */
 .art-crimson {
     background-color: #7a304e;
 }
 
-/* Oranžová barva jako záloha pro druhý projekt. */
 .art-amber {
     background-color: #925128;
 }
 
-/* Textová část karty. */
 .project-info {
     padding: 18px;
 }
 
-/* Název projektu. */
 .project-info h3 {
     margin: 0 0 8px;
     font-size: 13px;
 }
 
-/* Popis projektu. */
 .project-info p {
     margin: 0 0 10px;
     color: #adb5d0;
 }
 
-/* Použité technologie. */
 .project-tech {
     display: block;
     margin-bottom: 14px;
@@ -646,7 +687,6 @@ h1 {
     font-size: 8px;
 }
 
-/* Odkaz „Zobrazit“ na kartě. */
 .project-link-text {
     display: inline-block;
     color: #ffd166;
@@ -655,13 +695,94 @@ h1 {
     transition: color 0.3s ease, letter-spacing 0.3s ease;
 }
 
-/* Odkaz po najetí na kartu zrůžoví a dostane rozestup. */
 .project-card:hover .project-link-text {
     color: #ff5c7c;
     letter-spacing: 1.5px;
 }
 
-/* Kontaktní sekce – menší, ale bohatší. */
+/* === FAQ SEKCE === */
+
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    border: 1px solid #303958;
+    border-radius: 12px;
+    background: rgba(23, 28, 50, .6);
+    overflow: hidden;
+    transition: border-color .3s ease, box-shadow .3s ease;
+}
+
+.faq-item[open] {
+    border-color: #ff5c7c;
+    box-shadow: 0 0 20px rgba(255, 92, 124, .2);
+}
+
+.faq-item summary {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 22px;
+    color: #f7f7ff;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 11px;
+    line-height: 1.5;
+    cursor: pointer;
+    list-style: none;
+    transition: color .3s ease, background .3s ease;
+}
+
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item summary::marker {
+    content: '';
+}
+
+.faq-item summary:hover {
+    color: #ffd166;
+    background: rgba(255, 209, 102, .04);
+}
+
+.faq-marker {
+    color: #ff5c7c;
+    font-size: 10px;
+    transition: transform .3s ease, color .3s ease;
+    flex-shrink: 0;
+}
+
+.faq-item[open] .faq-marker {
+    transform: rotate(90deg);
+    color: #ffd166;
+}
+
+.faq-item p {
+    margin: 0;
+    padding: 0 22px 20px 46px;
+    color: #adb5d0;
+    font-size: 15px;
+    line-height: 1.7;
+    animation: faq-open .4s ease;
+}
+
+@keyframes faq-open {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .contact-section {
     position: relative;
     scroll-margin-top: 100px;
@@ -676,7 +797,6 @@ h1 {
     overflow: hidden;
 }
 
-/* Pixelové křížky v rozích kontaktní sekce. */
 .contact-corner {
     position: absolute;
     color: #ffd166;
@@ -709,13 +829,11 @@ h1 {
     animation-delay: 1.5s;
 }
 
-/* Nadpis kontaktní sekce. */
 .contact-section h2 {
     margin: 10px 0 14px;
     font-size: clamp(20px, 4vw, 32px);
 }
 
-/* Blikající kurzor za nadpisem (jako v terminálu). */
 .cursor {
     display: inline-block;
     width: 4px;
@@ -732,7 +850,6 @@ h1 {
     }
 }
 
-/* Podtitulek pod nadpisem. */
 .contact-subtitle {
     max-width: 520px;
     margin: 0 auto 28px;
@@ -741,7 +858,6 @@ h1 {
     line-height: 1.7;
 }
 
-/* Skupina proklikovacích tlačítek. */
 .contact-buttons {
     display: flex;
     flex-wrap: wrap;
@@ -751,7 +867,6 @@ h1 {
     margin: 0 auto 24px;
 }
 
-/* Společný základ pro všechna kontaktní tlačítka. */
 .contact-btn {
     position: relative;
     display: inline-flex;
@@ -776,7 +891,6 @@ h1 {
         color .25s ease;
 }
 
-/* Světelný pruh, který při hoveru projede tlačítkem. */
 .contact-btn::before {
     content: '';
     position: absolute;
@@ -784,10 +898,7 @@ h1 {
     left: -75%;
     width: 50%;
     height: 100%;
-    background: linear-gradient(120deg,
-            transparent,
-            rgba(255, 255, 255, .18),
-            transparent);
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, .18), transparent);
     transform: skewX(-20deg);
     transition: left .6s ease;
     pointer-events: none;
@@ -797,12 +908,10 @@ h1 {
     left: 125%;
 }
 
-/* Tlačítko se při hoveru nadzvedne. */
 .contact-btn:hover {
     transform: translateY(-3px);
 }
 
-/* Ikona vlevo. */
 .contact-btn-icon {
     font-size: 14px;
     transition: transform .3s ease;
@@ -812,7 +921,6 @@ h1 {
     transform: rotate(-10deg) scale(1.2);
 }
 
-/* Šipka vpravo – při hoveru se posune. */
 .contact-btn-arrow {
     font-size: 14px;
     transition: transform .3s ease;
@@ -822,7 +930,6 @@ h1 {
     transform: translateX(4px);
 }
 
-/* Primární tlačítko – žluté, výrazné. */
 .contact-btn-primary {
     border-color: #ffd166;
     background: #ffd166;
@@ -839,7 +946,6 @@ h1 {
     box-shadow: 0 10px 30px rgba(255, 209, 102, .35);
 }
 
-/* Sekundární tlačítko – tmavé s růžovým rámečkem. */
 .contact-btn-secondary {
     border-color: rgba(255, 92, 124, .5);
     background: rgba(255, 92, 124, .08);
@@ -856,7 +962,6 @@ h1 {
     box-shadow: 0 10px 30px rgba(255, 92, 124, .3);
 }
 
-/* Ghost tlačítko – jen obrys, decentní. */
 .contact-btn-ghost {
     border-color: #303958;
     background: transparent;
@@ -874,7 +979,6 @@ h1 {
     box-shadow: 0 10px 30px rgba(255, 209, 102, .15);
 }
 
-/* Stavový řádek dole (ONLINE • ODPOVÍDÁM…). */
 .contact-status {
     display: inline-flex;
     align-items: center;
@@ -886,7 +990,6 @@ h1 {
     letter-spacing: .5px;
 }
 
-/* Patička stránky. */
 footer {
     display: flex;
     justify-content: space-between;
@@ -896,7 +999,6 @@ footer {
     font-size: 8px;
 }
 
-/* Odkazy v patičce. */
 .footer-links {
     display: flex;
     gap: 18px;
@@ -904,13 +1006,11 @@ footer {
 
 /* === AKTIVNÍ ODKAZ V MENU === */
 
-/* Aktivní odkaz v menu je žlutý a podtržený. */
 nav a.active {
     color: #ffd166;
     position: relative;
 }
 
-/* Podtržení aktivního odkazu – jemná linka pod textem. */
 nav a.active::after {
     content: '';
     position: absolute;
@@ -935,7 +1035,6 @@ nav a.active::after {
 
 /* === POČÍTADLO NÁVŠTĚV V PATIČCE === */
 
-/* Badge s počítadlem. */
 .visitor-badge {
     display: inline-flex;
     align-items: center;
@@ -949,19 +1048,16 @@ nav a.active::after {
     letter-spacing: .5px;
 }
 
-/* Popisek "NÁVŠTĚVNÍK #". */
 .visitor-label {
     color: #ff5c7c;
 }
 
-/* Samotné číslo – žluté, blikající jako LED display. */
 .visitor-count {
     color: #ffd166;
     text-shadow: 0 0 6px rgba(255, 209, 102, .6);
     animation: visitor-flicker 4s steps(1) infinite;
 }
 
-/* Občasné zablikání čísla – jako starý LED displej. */
 @keyframes visitor-flicker {
 
     0%,
@@ -983,6 +1079,19 @@ nav a.active::after {
     }
 }
 
+/* === FADE-UP ANIMACE PŘI SCROLLU === */
+
+.js .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.js .reveal.visible {
+    opacity: 1;
+    transform: none;
+}
+
 /* Společné nastavení pevných prvků na pozadí. */
 .pixel-stars,
 .moving-clouds,
@@ -994,7 +1103,6 @@ nav a.active::after {
     z-index: 0;
 }
 
-/* Slunce složené z barevných pruhů. */
 .sunset-sun {
     top: calc(50vh - 150px);
     left: 50%;
@@ -1006,7 +1114,6 @@ nav a.active::after {
     transform: translate(-50%, 0);
 }
 
-/* Měsíc s pixelovými rohy. */
 .moon {
     top: calc(50vh - 200px);
     left: 50%;
@@ -1019,7 +1126,6 @@ nav a.active::after {
     transform: translate(-50%, 0);
 }
 
-/* Základ kráterů na měsíci. */
 .moon::before,
 .moon::after {
     position: absolute;
@@ -1028,7 +1134,6 @@ nav a.active::after {
     content: '';
 }
 
-/* První skupina kráterů. */
 .moon::before {
     top: 50px;
     left: 60px;
@@ -1037,7 +1142,6 @@ nav a.active::after {
     box-shadow: 75px 15px 0 -6px #b8bad0, 35px 88px 0 -3px #b8bad0;
 }
 
-/* Druhá skupina kráterů. */
 .moon::after {
     top: 150px;
     left: 68px;
@@ -1046,7 +1150,6 @@ nav a.active::after {
     box-shadow: 66px -50px 0 -4px #b8bad0, -25px -40px 0 -7px #b8bad0;
 }
 
-/* Moře na spodku obrazovky. */
 .sunset-sea {
     top: calc(50vh + 110px);
     right: 0;
@@ -1056,14 +1159,12 @@ nav a.active::after {
     background: linear-gradient(to bottom, rgba(37, 41, 77, .45), rgba(13, 16, 32, .9));
 }
 
-/* Obsah a patička leží nad pozadím. */
 main,
 footer {
     position: relative;
     z-index: 1;
 }
 
-/* Animace slunce při scrollu. */
 @keyframes sun-scroll {
     from {
         opacity: 1;
@@ -1076,7 +1177,6 @@ footer {
     }
 }
 
-/* Animace měsíce při scrollu. */
 @keyframes moon-scroll {
     from {
         opacity: 0;
@@ -1091,17 +1191,13 @@ footer {
     }
 }
 
-/* Slunce a měsíc se hýbou podle scrollu, jen v podporovaných prohlížečích. */
 @supports (animation-timeline: scroll()) {
-
-    /* Slunce zapne scrollovací animaci. */
     .sunset-sun {
         animation: sun-scroll linear both;
         animation-timeline: scroll(root);
         animation-range: 0px 600px;
     }
 
-    /* Měsíc zapne scrollovací animaci. */
     .moon {
         animation: moon-scroll linear both;
         animation-timeline: scroll(root);
@@ -1109,7 +1205,6 @@ footer {
     }
 }
 
-/* Vrstva s hvězdičkami. */
 .pixel-stars {
     position: fixed;
     inset: 0;
@@ -1118,103 +1213,88 @@ footer {
     z-index: 0;
 }
 
-/* Základní vzhled jedné hvězdičky. */
 .pixel-star {
     position: absolute;
     width: 4px;
     height: 4px;
     background: #ffd166;
-    box-shadow: 4px 0 #ffd166, -4px 0 #ffd166,
-        0 4px #ffd166, 0 -4px #ffd166;
+    box-shadow: 4px 0 #ffd166, -4px 0 #ffd166, 0 4px #ffd166, 0 -4px #ffd166;
     opacity: 0;
     animation: twinkle 2.5s steps(2, end) infinite;
 }
 
-/* Pozice a zpoždění hvězdičky 1. */
 .star-1 {
     top: 10%;
     left: 8%;
     animation-delay: 0s;
 }
 
-/* Pozice a zpoždění hvězdičky 2. */
 .star-2 {
     top: 18%;
     left: 25%;
     animation-delay: .8s;
 }
 
-/* Pozice a zpoždění hvězdičky 3. */
 .star-3 {
     top: 8%;
     left: 43%;
     animation-delay: 1.4s;
 }
 
-/* Pozice a zpoždění hvězdičky 4. */
 .star-4 {
     top: 25%;
     left: 68%;
     animation-delay: .4s;
 }
 
-/* Pozice a zpoždění hvězdičky 5. */
 .star-5 {
     top: 12%;
     left: 88%;
     animation-delay: 1.8s;
 }
 
-/* Pozice a zpoždění hvězdičky 6. */
 .star-6 {
     top: 40%;
     left: 15%;
     animation-delay: 1s;
 }
 
-/* Pozice a zpoždění hvězdičky 7. */
 .star-7 {
     top: 52%;
     left: 35%;
     animation-delay: .6s;
 }
 
-/* Pozice a zpoždění hvězdičky 8. */
 .star-8 {
     top: 45%;
     left: 82%;
     animation-delay: 1.6s;
 }
 
-/* Pozice a zpoždění hvězdičky 9. */
 .star-9 {
     top: 68%;
     left: 7%;
     animation-delay: 1.2s;
 }
 
-/* Pozice a zpoždění hvězdičky 10. */
 .star-10 {
     top: 75%;
     left: 92%;
     animation-delay: .2s;
 }
 
-/* Pozice a zpoždění hvězdičky 11. */
 .star-11 {
     top: 88%;
     left: 42%;
     animation-delay: 2s;
 }
 
-/* Pozice a zpoždění hvězdičky 12. */
 .star-12 {
     top: 82%;
     left: 72%;
     animation-delay: .9s;
 }
 
-/* Animace blikání hvězdiček. */
 @keyframes twinkle {
 
     0%,
@@ -1229,17 +1309,13 @@ footer {
     }
 }
 
-/* Tablet: úvod se skládá pod sebe. */
 @media (max-width: 1000px) {
-
-    /* Úvod má jeden sloupec. */
     .hero {
         grid-template-columns: minmax(0, 1fr);
         gap: 40px;
         padding: 50px 0 60px;
     }
 
-    /* Avatar se vycentruje. */
     .avatar-box {
         width: 100%;
         max-width: 350px;
@@ -1247,17 +1323,14 @@ footer {
     }
 }
 
-/* Mobil: úpravy pro displeje do 760 px. */
 @media (max-width: 760px) {
 
-    /* Užší boční okraje hlavičky, obsahu a patičky. */
     .site-header,
     main,
     footer {
         width: calc(100% - 28px);
     }
 
-    /* Hlavička je plovoucí bublina. */
     .site-header {
         top: 10px;
         min-height: 56px;
@@ -1265,14 +1338,12 @@ footer {
         border-radius: 999px;
     }
 
-    /* Hamburger se zobrazí. */
     .menu-toggle {
         display: flex;
         width: 40px;
         height: 40px;
     }
 
-    /* Menu se rozbalí pod hlavičkou jako samostatná bublina. */
     nav {
         position: absolute;
         top: 100%;
@@ -1291,13 +1362,10 @@ footer {
         overflow: hidden;
     }
 
-    /* Otevřené menu se zobrazí. */
     .nav-open nav {
         display: flex;
     }
 
-    /* Když je menu otevřené, hlavička ztratí spodní zaoblení,
-       aby menu plynule navazovalo. */
     .site-header.nav-open {
         border-radius: 20px 20px 0 0;
         background: rgba(13, 16, 32, .98);
@@ -1307,26 +1375,21 @@ footer {
             0 0 0 1px rgba(255, 92, 124, .18);
     }
 
-    /* Spodní menu po otevření ztratí horní zaoblení a okraj,
-       aby dohromady s hlavičkou tvořilo jednu spojitou bublinu. */
     .nav-open nav {
         border-top-left-radius: 0;
         border-top-right-radius: 0;
         border-top: 0;
     }
 
-    /* Odkazy v menu jsou pod sebou s oddělovači. */
     nav a {
         padding: 14px 0;
         border-bottom: 1px solid #303958;
     }
 
-    /* Poslední odkaz nemá čáru. */
     nav a:last-child {
         border-bottom: 0;
     }
 
-    /* Aktivní odkaz v mobilním menu – jen barva, bez podtržení. */
     nav a.active::after {
         display: none;
     }
@@ -1335,104 +1398,85 @@ footer {
         color: #ffd166;
     }
 
-    /* Obsah začíná níž kvůli plovoucí hlavičce. */
     main {
         padding-top: 84px;
     }
 
-    /* Kontakt se po kliknutí na odkaz nezasune pod hlavičku. */
     .contact-section {
         scroll-margin-top: 84px;
     }
 
-    /* Menší mezery v úvodu. */
     .hero {
         gap: 36px;
         padding: 36px 0 50px;
     }
 
-    /* Menší text nad nadpisem. */
     .eyebrow {
         margin-bottom: 16px;
         font-size: 10px;
     }
 
-    /* Menší hlavní nadpis. */
     h1 {
         margin-bottom: 20px;
         font-size: clamp(24px, 8vw, 40px);
     }
 
-    /* Menší úvodní odstavec. */
     .intro {
         font-size: 17px;
     }
 
-    /* Tlačítka se v případě potřeby zalomí. */
     .hero-actions {
         flex-wrap: wrap;
     }
 
-    /* Nižší obrazovka avatara. */
     .avatar-screen {
         height: 240px;
     }
 
-    /* Kompaktnější panel statistik. */
     .stats {
         gap: 6px;
         padding: 18px 6px;
     }
 
-    /* Statistiky se dělí o šířku rovným dílem. */
     .stats>div {
         flex: 1;
     }
 
-    /* Menší čísla ve statistikách. */
     .stats strong {
         font-size: 18px;
     }
 
-    /* Popisky statistik s menším řádkováním. */
     .stats span {
         line-height: 1.6;
     }
 
-    /* Menší odsazení nad sekcemi. */
     .content-section {
         padding-top: 80px;
     }
 
-    /* Nadpis sekce se může zalomit. */
     .section-heading {
         flex-wrap: wrap;
         gap: 6px 12px;
         margin-bottom: 22px;
     }
 
-    /* Menší název sekce. */
     .section-heading h2 {
         font-size: 14px;
     }
 
-    /* O mně je v jednom sloupci. */
     .about-grid {
         grid-template-columns: minmax(0, 1fr);
         gap: 30px;
     }
 
-    /* Menší velký odstavec. */
     .large-copy {
         font-size: 20px;
     }
 
-    /* Menší vnitřní odsazení karty dovedností. */
     .skill-panel {
         padding: 18px;
     }
 
-    /* Tooltip se zalamuje, aby nevyjel z obrazovky. */
     .skill-item::after {
         width: max-content;
         max-width: min(240px, 70vw);
@@ -1442,36 +1486,42 @@ footer {
         white-space: normal;
     }
 
-    /* Projekty jsou v jednom sloupci. */
     .project-grid {
         grid-template-columns: minmax(0, 1fr);
         max-width: 480px;
         margin: 0 auto;
     }
 
-    /* Nižší plocha karty projektu. */
     .project-art {
         height: 190px;
     }
 
-    /* Menší symbol projektu. */
     .project-art span {
         font-size: 48px;
     }
 
-    /* Menší odsazení kontaktu. */
+    /* FAQ na mobilu. */
+    .faq-item summary {
+        padding: 14px 16px;
+        font-size: 10px;
+        gap: 10px;
+    }
+
+    .faq-item p {
+        padding: 0 16px 16px 38px;
+        font-size: 14px;
+    }
+
     .contact-section {
         margin: 70px 0 50px;
         padding: 35px 18px 28px;
     }
 
-    /* Menší nadpis kontaktu. */
     .contact-section h2 {
         font-size: clamp(15px, 4.8vw, 22px);
         line-height: 1.5;
     }
 
-    /* Kontaktní tlačítka pod sebou na mobilu. */
     .contact-buttons {
         flex-direction: column;
         align-items: stretch;
@@ -1479,14 +1529,12 @@ footer {
         max-width: 320px;
     }
 
-    /* Tlačítka roztáhnou se na plnou šířku. */
     .contact-btn {
         justify-content: space-between;
         padding: 13px 18px;
         font-size: 9px;
     }
 
-    /* Patička je vycentrovaná pod sebou. */
     footer {
         flex-direction: column;
         align-items: center;
@@ -1496,49 +1544,48 @@ footer {
         text-align: center;
     }
 
-    /* Menší počítadlo na mobilu. */
     .visitor-badge {
         font-size: 7px;
         padding: 5px 10px;
     }
 
-    /* Odkazy v patičce se mohou zalomit. */
     .footer-links {
         flex-wrap: wrap;
         justify-content: center;
     }
+
+    /* Menší loader na mobilu. */
+    .loader-bar {
+        width: 200px;
+    }
+
+    .loader-text {
+        font-size: 11px;
+    }
 }
 
-/* Velmi malé displeje: ještě menší popisky statistik. */
 @media (max-width: 380px) {
-
-    /* Popisky statistik jsou menší. */
     .stats span {
         font-size: 7px;
     }
 }
 
-/* Uživatelé s vypnutými animacemi: vypnutí pohybu. */
 @media (prefers-reduced-motion: reduce) {
 
-    /* Vypnutí blikání, houpání a třpytu. */
     .blink,
     .pixel-avatar,
     .pixel-star {
         animation: none;
     }
 
-    /* Hvězdičky zůstanou statické. */
     .pixel-star {
         opacity: .6;
     }
 
-    /* Scrollování bez animace. */
     html {
         scroll-behavior: auto;
     }
 
-    /* Vypnutí hover transformací pro uživatele s citlivostí na pohyb. */
     .project-card:hover {
         transform: none;
     }
@@ -1563,5 +1610,20 @@ footer {
 
     .visitor-count {
         animation: none;
+    }
+
+    .js .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    /* Vypnutí loaderu a progress baru pro uživatele s citlivostí na pohyb. */
+    .loader {
+        display: none;
+    }
+
+    .scroll-progress {
+        display: none;
     }
 }

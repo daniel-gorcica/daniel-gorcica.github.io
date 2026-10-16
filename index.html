@@ -14,6 +14,20 @@
 
 <body>
 
+    <!-- Loading screen -->
+    <div class="loader" aria-hidden="true">
+        <div class="loader-content">
+            <p class="loader-text">▶ NAČÍTÁM HRU...</p>
+            <div class="loader-bar">
+                <div class="loader-fill"></div>
+            </div>
+            <p class="loader-percent">100%</p>
+        </div>
+    </div>
+
+    <!-- Scroll progress bar -->
+    <div class="scroll-progress" aria-hidden="true"></div>
+
     <div class="moving-clouds">
         <div class="cloud cloud-1"></div>
         <div class="cloud cloud-2"></div>
@@ -49,6 +63,7 @@
             <a href="#domu">ÚVOD</a>
             <a href="#o-mne">O MNĚ</a>
             <a href="#projekty">PROJEKTY</a>
+            <a href="#faq">FAQ</a>
             <a href="#kontakt">KONTAKT</a>
         </nav>
     </header>
@@ -206,13 +221,13 @@
             </div>
         </section>
 
-        <div class="stats">
+        <div class="stats reveal">
             <div><strong>03</strong><span>LET ZKUŠENOSTÍ</span></div>
             <div><strong>02</strong><span>DOKONČENÉ PROJEKTY</span></div>
             <div><strong class="infinity">∞</strong><span>CHUTI TVOŘIT</span></div>
         </div>
 
-        <section class="content-section" id="o-mne">
+        <section class="content-section reveal" id="o-mne">
             <div class="section-heading"><span>01 //</span>
                 <h2>O MNĚ</h2>
             </div>
@@ -245,7 +260,7 @@
             </div>
         </section>
 
-        <section class="content-section" id="projekty">
+        <section class="content-section reveal" id="projekty">
             <div class="section-heading"><span>02 //</span>
                 <h2>VYBRANÉ PROJEKTY</h2>
             </div>
@@ -279,7 +294,57 @@
             </div>
         </section>
 
-        <section class="contact-section" id="kontakt">
+        <section class="content-section reveal" id="faq">
+            <div class="section-heading"><span>03 //</span>
+                <h2>ČASTÉ OTÁZKY</h2>
+            </div>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary>
+                        <span class="faq-marker">▶</span>
+                        <span>Umíš JavaScript?</span>
+                    </summary>
+                    <p>Zatím ne, ale chci se ho naučit. Momentálně se soustředím na HTML, CSS a základy Pythonu.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>
+                        <span class="faq-marker">▶</span>
+                        <span>Jak dlouho programuješ?</span>
+                    </summary>
+                    <p>Asi 3 roky, ale aktivně se vývoji věnuju hlavně poslední rok. Každý nový projekt beru jako další
+                        level.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>
+                        <span class="faq-marker">▶</span>
+                        <span>Máš rád hry?</span>
+                    </summary>
+                    <p>Jasně! Proto máš celý web v herním stylu.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>
+                        <span class="faq-marker">▶</span>
+                        <span>Můžeš pro mě něco vytvořit?</span>
+                    </summary>
+                    <p>Klidně! Napiš mi na e-mail nebo přes Instagram a domluvíme se. Menší weby zvládnu sám, na větší
+                        se domluvíme.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>
+                        <span class="faq-marker">▶</span>
+                        <span>Co plánuješ dál?</span>
+                    </summary>
+                    <p>Naučit se JavaScript, udělat pár dalších projektů, a pak třeba React nebo Node.js. Uvidíme, kam
+                        mě to zavede.</p>
+                </details>
+            </div>
+        </section>
+
+        <section class="contact-section reveal" id="kontakt">
             <span class="contact-corner contact-corner-tl">+</span>
             <span class="contact-corner contact-corner-tr">+</span>
             <span class="contact-corner contact-corner-bl">+</span>
@@ -335,6 +400,9 @@
     </footer>
 
     <script>
+        // === 0. PŘIDÁNÍ TŘÍDY .js NA <html> (pro fade-up animace) ===
+        document.documentElement.classList.add('js');
+
         // === 1. OTEVŘENÍ / ZAVŘENÍ MOBILNÍHO MENU ===
         const header = document.querySelector('.site-header');
         const toggle = document.querySelector('.menu-toggle');
@@ -379,7 +447,7 @@
             if (!el) return;
 
             const KEY = 'daniel-portfolio-visits';
-            const BASE = 1337; // fiktivní základ pro retro efekt
+            const BASE = 1337;
 
             try {
                 const res = await fetch('https://api.counterapi.dev/v1/daniel-gorcica-portfolio/visits/up');
@@ -396,6 +464,20 @@
             }
         }
         loadVisitorCount();
+
+        // === 5. FADE-UP ANIMACE PŘI SCROLLU ===
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15
+        });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
     </script>
 
 </body>
