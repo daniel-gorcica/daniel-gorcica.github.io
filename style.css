@@ -34,25 +34,39 @@ footer {
     margin: 0 auto;
 }
 
-/* Pevná hlavička přilepená nahoře. */
+/* Pevná hlavička – plovoucí zaoblená bublina. */
 .site-header {
     position: fixed;
-    top: 0;
+    top: 14px;
     left: 50%;
     z-index: 2;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 76px;
-    padding: 0 20px;
+    min-height: 64px;
+    padding: 0 26px;
     transform: translateX(-50%);
-    background: rgba(13, 16, 32, .94);
-    backdrop-filter: blur(8px);
+    background: rgba(13, 16, 32, 0);
+    backdrop-filter: blur(0);
+    border-radius: 999px;
+    transition:
+        background .35s ease,
+        backdrop-filter .35s ease,
+        box-shadow .35s ease;
 }
 
-/* Odsazení obsahu pod pevnou hlavičku. */
+/* Po scrollu se hlavička změní v tmavou bublinu. */
+.site-header.scrolled {
+    background: rgba(13, 16, 32, .94);
+    backdrop-filter: blur(10px);
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, .45),
+        0 0 0 1px rgba(255, 92, 124, .18);
+}
+
+/* Odsazení obsahu pod plovoucí hlavičku. */
 main {
-    padding-top: 76px;
+    padding-top: 100px;
 }
 
 /* Pixelové písmo pro nadpisy, menu, tlačítka a štítky. */
@@ -496,13 +510,14 @@ h1 {
     border-radius: 14px;
     background: #171c32;
     box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.35s cubic-bezier(.2, .7, .3, 1);
 }
 
-/* Karta po najetí růžově září. */
+/* Karta po najetí růžově září a mírně se nadzvedne. */
 .project-card:hover {
     border-color: #ff5c7c;
-    box-shadow: 0 0 25px rgba(255, 92, 124, 0.4), inset 0 0 15px rgba(255, 92, 124, 0.15);
+    box-shadow: 0 0 25px rgba(255, 92, 124, 0.4), inset 0 0 15px rgba(255, 92, 124, 0.15), 0 20px 40px rgba(0, 0, 0, .35);
+    transform: translateY(-6px);
 }
 
 /* Číslo projektu v rohu karty. */
@@ -514,16 +529,44 @@ h1 {
     font-size: 10px;
 }
 
-/* Barevná plocha v horní části karty. */
+/* Plocha s obrázkem v horní části karty. */
 .project-art {
     position: relative;
     display: grid;
     place-items: center;
-    height: 190px;
+    height: 220px;
     text-align: center;
+    overflow: hidden;
+    isolation: isolate;
 }
 
-/* Obsah plochy leží nad pozadím. */
+/* Obrázek jako pozadí – celý viditelný, vycentrovaný. */
+.project-art::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: var(--bg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: brightness(.85) saturate(1.1);
+    transition: transform 0.6s cubic-bezier(.2, .7, .3, 1),
+        filter 0.4s ease;
+}
+
+/* Tmavý overlay nad obrázkem, aby byl text čitelný. */
+.project-art::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(rgba(13, 16, 32, .25), rgba(13, 16, 32, .7));
+    pointer-events: none;
+    transition: background 0.4s ease;
+}
+
+/* Obsah plochy leží nad obrázkem i overlayem. */
 .project-art span,
 .project-art i {
     position: relative;
@@ -534,22 +577,47 @@ h1 {
 .project-art span {
     display: block;
     font-size: 60px;
+    transition: transform 0.45s cubic-bezier(.2, .7, .3, 1),
+        color 0.3s ease;
 }
 
 /* Název pod symbolem. */
 .project-art i {
     font-size: 11px;
     font-style: normal;
+    transition: letter-spacing 0.4s ease;
 }
 
-/* Karmínové pozadí první karty. */
+/* Po najetí na kartu se obrázek jemně přiblíží a rozzáří. */
+.project-card:hover .project-art::before {
+    transform: scale(1.12);
+    filter: brightness(1.15) saturate(1.35);
+}
+
+/* Overlay se po najetí trochu prosvětlí. */
+.project-card:hover .project-art::after {
+    background: linear-gradient(rgba(13, 16, 32, .1), rgba(255, 92, 124, .25));
+}
+
+/* Symbol se otočí, zvětší a zežloutne. */
+.project-card:hover .project-art span {
+    transform: scale(1.2) rotate(15deg);
+    color: #ffd166;
+}
+
+/* Název pod symbolem dostane jemný rozestup. */
+.project-card:hover .project-art i {
+    letter-spacing: 2px;
+}
+
+/* Karmínová barva jako záloha pro první projekt. */
 .art-crimson {
-    background: #7a304e;
+    background-color: #7a304e;
 }
 
-/* Oranžové pozadí druhé karty. */
+/* Oranžová barva jako záloha pro druhý projekt. */
 .art-amber {
-    background: #925128;
+    background-color: #925128;
 }
 
 /* Textová část karty. */
@@ -584,29 +652,238 @@ h1 {
     color: #ffd166;
     font-family: 'Press Start 2P', monospace;
     font-size: 9px;
-    transition: color .2s ease;
+    transition: color 0.3s ease, letter-spacing 0.3s ease;
 }
 
-/* Odkaz po najetí na kartu zrůžoví. */
+/* Odkaz po najetí na kartu zrůžoví a dostane rozestup. */
 .project-card:hover .project-link-text {
     color: #ff5c7c;
+    letter-spacing: 1.5px;
 }
 
-/* Kontaktní sekce v rámečku. */
+/* Kontaktní sekce – menší, ale bohatší. */
 .contact-section {
-    scroll-margin-top: 90px;
+    position: relative;
+    scroll-margin-top: 100px;
     margin: 100px 0 70px;
-    padding: 55px 20px;
+    padding: 45px 30px 35px;
     border: 1px solid #ff5c7c;
     border-radius: 16px;
-    background: #202844;
+    background:
+        radial-gradient(circle at top, rgba(255, 92, 124, .08), transparent 60%),
+        #202844;
     text-align: center;
+    overflow: hidden;
+}
+
+/* Pixelové křížky v rozích kontaktní sekce. */
+.contact-corner {
+    position: absolute;
+    color: #ffd166;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 16px;
+    opacity: .7;
+    animation: blink 2s steps(2) infinite;
+}
+
+.contact-corner-tl {
+    top: 10px;
+    left: 14px;
+}
+
+.contact-corner-tr {
+    top: 10px;
+    right: 14px;
+    animation-delay: .5s;
+}
+
+.contact-corner-bl {
+    bottom: 10px;
+    left: 14px;
+    animation-delay: 1s;
+}
+
+.contact-corner-br {
+    bottom: 10px;
+    right: 14px;
+    animation-delay: 1.5s;
 }
 
 /* Nadpis kontaktní sekce. */
 .contact-section h2 {
-    margin: 10px 0 28px;
-    font-size: clamp(20px, 4vw, 36px);
+    margin: 10px 0 14px;
+    font-size: clamp(20px, 4vw, 32px);
+}
+
+/* Blikající kurzor za nadpisem (jako v terminálu). */
+.cursor {
+    display: inline-block;
+    width: 4px;
+    height: 1em;
+    margin-left: 6px;
+    background: #ff5c7c;
+    vertical-align: text-bottom;
+    animation: cursor-blink 1s steps(1) infinite;
+}
+
+@keyframes cursor-blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Podtitulek pod nadpisem. */
+.contact-subtitle {
+    max-width: 520px;
+    margin: 0 auto 28px;
+    color: #adb5d0;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+/* Skupina proklikovacích tlačítek. */
+.contact-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    max-width: 720px;
+    margin: 0 auto 24px;
+}
+
+/* Společný základ pro všechna kontaktní tlačítka. */
+.contact-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 22px;
+    border: 1px solid #303958;
+    border-radius: 12px;
+    background: rgba(13, 16, 32, .6);
+    color: #f7f7ff;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    letter-spacing: .5px;
+    text-decoration: none;
+    cursor: pointer;
+    overflow: hidden;
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        background .25s ease,
+        box-shadow .25s ease,
+        color .25s ease;
+}
+
+/* Světelný pruh, který při hoveru projede tlačítkem. */
+.contact-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg,
+            transparent,
+            rgba(255, 255, 255, .18),
+            transparent);
+    transform: skewX(-20deg);
+    transition: left .6s ease;
+    pointer-events: none;
+}
+
+.contact-btn:hover::before {
+    left: 125%;
+}
+
+/* Tlačítko se při hoveru nadzvedne. */
+.contact-btn:hover {
+    transform: translateY(-3px);
+}
+
+/* Ikona vlevo. */
+.contact-btn-icon {
+    font-size: 14px;
+    transition: transform .3s ease;
+}
+
+.contact-btn:hover .contact-btn-icon {
+    transform: rotate(-10deg) scale(1.2);
+}
+
+/* Šipka vpravo – při hoveru se posune. */
+.contact-btn-arrow {
+    font-size: 14px;
+    transition: transform .3s ease;
+}
+
+.contact-btn:hover .contact-btn-arrow {
+    transform: translateX(4px);
+}
+
+/* Primární tlačítko – žluté, výrazné. */
+.contact-btn-primary {
+    border-color: #ffd166;
+    background: #ffd166;
+    color: #171321;
+}
+
+.contact-btn-primary .contact-btn-icon,
+.contact-btn-primary .contact-btn-arrow {
+    color: #171321;
+}
+
+.contact-btn-primary:hover {
+    background: #ffdd8c;
+    box-shadow: 0 10px 30px rgba(255, 209, 102, .35);
+}
+
+/* Sekundární tlačítko – tmavé s růžovým rámečkem. */
+.contact-btn-secondary {
+    border-color: rgba(255, 92, 124, .5);
+    background: rgba(255, 92, 124, .08);
+    color: #f7f7ff;
+}
+
+.contact-btn-secondary .contact-btn-icon {
+    color: #ff5c7c;
+}
+
+.contact-btn-secondary:hover {
+    border-color: #ff5c7c;
+    background: rgba(255, 92, 124, .18);
+    box-shadow: 0 10px 30px rgba(255, 92, 124, .3);
+}
+
+/* Ghost tlačítko – jen obrys, decentní. */
+.contact-btn-ghost {
+    border-color: #303958;
+    background: transparent;
+    color: #adb5d0;
+}
+
+.contact-btn-ghost .contact-btn-icon {
+    color: #ffd166;
+}
+
+.contact-btn-ghost:hover {
+    border-color: #ffd166;
+    color: #f7f7ff;
+    background: rgba(255, 209, 102, .06);
+    box-shadow: 0 10px 30px rgba(255, 209, 102, .15);
+}
+
+/* Stavový řádek dole (ONLINE • ODPOVÍDÁM…). */
+.contact-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    color: #adb5d0;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    letter-spacing: .5px;
 }
 
 /* Patička stránky. */
@@ -623,6 +900,87 @@ footer {
 .footer-links {
     display: flex;
     gap: 18px;
+}
+
+/* === AKTIVNÍ ODKAZ V MENU === */
+
+/* Aktivní odkaz v menu je žlutý a podtržený. */
+nav a.active {
+    color: #ffd166;
+    position: relative;
+}
+
+/* Podtržení aktivního odkazu – jemná linka pod textem. */
+nav a.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 2px;
+    background: #ffd166;
+    box-shadow: 0 0 8px rgba(255, 209, 102, .6);
+    animation: nav-underline .3s ease;
+}
+
+@keyframes nav-underline {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
+
+/* === POČÍTADLO NÁVŠTĚV V PATIČCE === */
+
+/* Badge s počítadlem. */
+.visitor-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border: 1px solid #303958;
+    border-radius: 6px;
+    background: rgba(13, 16, 32, .6);
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    letter-spacing: .5px;
+}
+
+/* Popisek "NÁVŠTĚVNÍK #". */
+.visitor-label {
+    color: #ff5c7c;
+}
+
+/* Samotné číslo – žluté, blikající jako LED display. */
+.visitor-count {
+    color: #ffd166;
+    text-shadow: 0 0 6px rgba(255, 209, 102, .6);
+    animation: visitor-flicker 4s steps(1) infinite;
+}
+
+/* Občasné zablikání čísla – jako starý LED displej. */
+@keyframes visitor-flicker {
+
+    0%,
+    92%,
+    100% {
+        opacity: 1;
+    }
+
+    94% {
+        opacity: .4;
+    }
+
+    96% {
+        opacity: 1;
+    }
+
+    98% {
+        opacity: .6;
+    }
 }
 
 /* Společné nastavení pevných prvků na pozadí. */
@@ -735,6 +1093,7 @@ footer {
 
 /* Slunce a měsíc se hýbou podle scrollu, jen v podporovaných prohlížečích. */
 @supports (animation-timeline: scroll()) {
+
     /* Slunce zapne scrollovací animaci. */
     .sunset-sun {
         animation: sun-scroll linear both;
@@ -872,6 +1231,7 @@ footer {
 
 /* Tablet: úvod se skládá pod sebe. */
 @media (max-width: 1000px) {
+
     /* Úvod má jeden sloupec. */
     .hero {
         grid-template-columns: minmax(0, 1fr);
@@ -889,6 +1249,7 @@ footer {
 
 /* Mobil: úpravy pro displeje do 760 px. */
 @media (max-width: 760px) {
+
     /* Užší boční okraje hlavičky, obsahu a patičky. */
     .site-header,
     main,
@@ -896,18 +1257,22 @@ footer {
         width: calc(100% - 28px);
     }
 
-    /* Hlavička je nižší a obsahuje hamburger. */
+    /* Hlavička je plovoucí bublina. */
     .site-header {
-        min-height: 64px;
-        padding: 0 14px;
+        top: 10px;
+        min-height: 56px;
+        padding: 0 16px;
+        border-radius: 999px;
     }
 
     /* Hamburger se zobrazí. */
     .menu-toggle {
         display: flex;
+        width: 40px;
+        height: 40px;
     }
 
-    /* Menu se rozbalí pod hlavičkou. */
+    /* Menu se rozbalí pod hlavičkou jako samostatná bublina. */
     nav {
         position: absolute;
         top: 100%;
@@ -916,17 +1281,38 @@ footer {
         display: none;
         flex-direction: column;
         gap: 0;
-        padding: 4px 14px 8px;
-        border: 1px solid #303958;
-        border-top: 0;
-        border-radius: 0 0 12px 12px;
+        padding: 6px 14px 10px;
+        border: 1px solid rgba(255, 92, 124, .18);
+        border-radius: 20px;
         background: rgba(13, 16, 32, .98);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 14px 30px rgba(0, 0, 0, .45);
         font-size: 12px;
+        overflow: hidden;
     }
 
     /* Otevřené menu se zobrazí. */
     .nav-open nav {
         display: flex;
+    }
+
+    /* Když je menu otevřené, hlavička ztratí spodní zaoblení,
+       aby menu plynule navazovalo. */
+    .site-header.nav-open {
+        border-radius: 20px 20px 0 0;
+        background: rgba(13, 16, 32, .98);
+        backdrop-filter: blur(10px);
+        box-shadow:
+            0 10px 30px rgba(0, 0, 0, .45),
+            0 0 0 1px rgba(255, 92, 124, .18);
+    }
+
+    /* Spodní menu po otevření ztratí horní zaoblení a okraj,
+       aby dohromady s hlavičkou tvořilo jednu spojitou bublinu. */
+    .nav-open nav {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-top: 0;
     }
 
     /* Odkazy v menu jsou pod sebou s oddělovači. */
@@ -940,14 +1326,23 @@ footer {
         border-bottom: 0;
     }
 
-    /* Obsah začíná níž kvůli hlavičce. */
+    /* Aktivní odkaz v mobilním menu – jen barva, bez podtržení. */
+    nav a.active::after {
+        display: none;
+    }
+
+    nav a.active {
+        color: #ffd166;
+    }
+
+    /* Obsah začíná níž kvůli plovoucí hlavičce. */
     main {
-        padding-top: 72px;
+        padding-top: 84px;
     }
 
     /* Kontakt se po kliknutí na odkaz nezasune pod hlavičku. */
     .contact-section {
-        scroll-margin-top: 72px;
+        scroll-margin-top: 84px;
     }
 
     /* Menší mezery v úvodu. */
@@ -1056,7 +1451,7 @@ footer {
 
     /* Nižší plocha karty projektu. */
     .project-art {
-        height: 160px;
+        height: 190px;
     }
 
     /* Menší symbol projektu. */
@@ -1067,13 +1462,28 @@ footer {
     /* Menší odsazení kontaktu. */
     .contact-section {
         margin: 70px 0 50px;
-        padding: 40px 14px;
+        padding: 35px 18px 28px;
     }
 
     /* Menší nadpis kontaktu. */
     .contact-section h2 {
         font-size: clamp(15px, 4.8vw, 22px);
         line-height: 1.5;
+    }
+
+    /* Kontaktní tlačítka pod sebou na mobilu. */
+    .contact-buttons {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        max-width: 320px;
+    }
+
+    /* Tlačítka roztáhnou se na plnou šířku. */
+    .contact-btn {
+        justify-content: space-between;
+        padding: 13px 18px;
+        font-size: 9px;
     }
 
     /* Patička je vycentrovaná pod sebou. */
@@ -1086,6 +1496,12 @@ footer {
         text-align: center;
     }
 
+    /* Menší počítadlo na mobilu. */
+    .visitor-badge {
+        font-size: 7px;
+        padding: 5px 10px;
+    }
+
     /* Odkazy v patičce se mohou zalomit. */
     .footer-links {
         flex-wrap: wrap;
@@ -1095,6 +1511,7 @@ footer {
 
 /* Velmi malé displeje: ještě menší popisky statistik. */
 @media (max-width: 380px) {
+
     /* Popisky statistik jsou menší. */
     .stats span {
         font-size: 7px;
@@ -1103,6 +1520,7 @@ footer {
 
 /* Uživatelé s vypnutými animacemi: vypnutí pohybu. */
 @media (prefers-reduced-motion: reduce) {
+
     /* Vypnutí blikání, houpání a třpytu. */
     .blink,
     .pixel-avatar,
@@ -1118,5 +1536,32 @@ footer {
     /* Scrollování bez animace. */
     html {
         scroll-behavior: auto;
+    }
+
+    /* Vypnutí hover transformací pro uživatele s citlivostí na pohyb. */
+    .project-card:hover {
+        transform: none;
+    }
+
+    .project-card:hover .project-art::before,
+    .project-card:hover .project-art span {
+        transform: none;
+    }
+
+    .contact-btn:hover {
+        transform: none;
+    }
+
+    .contact-btn:hover::before {
+        left: -75%;
+    }
+
+    .contact-btn:hover .contact-btn-icon,
+    .contact-btn:hover .contact-btn-arrow {
+        transform: none;
+    }
+
+    .visitor-count {
+        animation: none;
     }
 }

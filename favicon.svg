@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" shape-rendering="crispEdges">
+  <!-- Žlutý stín (posunutý o 2 px doprava a dolů) -->
+  <g fill="#ffd166" transform="translate(2, 2)">
+    <rect x="8" y="6" width="4" height="20"/>
+    <rect x="8" y="6" width="12" height="4"/>
+    <rect x="8" y="22" width="12" height="4"/>
+    <rect x="20" y="10" width="4" height="12"/>
+    <rect x="16" y="10" width="4" height="4"/>
+    <rect x="16" y="18" width="4" height="4"/>
+  </g>
+
+  <!-- Růžové "D" navrchu -->
+  <g fill="#ff5c7c">
+    <rect x="8" y="6" width="4" height="20"/>
+    <rect x="8" y="6" width="12" height="4"/>
+    <rect x="8" y="22" width="12" height="4"/>
+    <rect x="20" y="10" width="4" height="12"/>
+    <rect x="16" y="10" width="4" height="4"/>
+    <rect x="16" y="18" width="4" height="4"/>
+  </g>
+</svg>

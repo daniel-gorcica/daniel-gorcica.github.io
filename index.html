@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daniel // Portfolio vývojáře</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
@@ -252,7 +253,8 @@
                 <a href="https://daniel-gorcica.github.io/real_madrid/" target="_blank" class="project-card">
                     <article>
                         <div class="project-number">01</div>
-                        <div class="project-art art-crimson"><span>✦</span><i>REAL<br>MADRID</i></div>
+                        <div class="project-art art-crimson" style="--bg: url('real_madrid.jpg')">
+                            <span>✦</span><i>REAL<br>MADRID</i></div>
                         <div class="project-info">
                             <h3>Real Madrid</h3>
                             <p>Fanouškovský web o Realu Madrid s přehledem základních informací a klubové historie.</p>
@@ -264,7 +266,8 @@
                 <a href="https://daniel-gorcica.github.io/projekt1-web/" target="_blank" class="project-card">
                     <article>
                         <div class="project-number">02</div>
-                        <div class="project-art art-amber"><span>◆</span><i>ROCKET<br>LEAGUE</i></div>
+                        <div class="project-art art-amber" style="--bg: url('rocket_league.jpg')">
+                            <span>◆</span><i>ROCKET<br>LEAGUE</i></div>
                         <div class="project-info">
                             <h3>Rocket League</h3>
                             <p>Tematický web inspirovaný hrou Rocket League, zaměřený na výrazný design a barvy.</p>
@@ -277,14 +280,51 @@
         </section>
 
         <section class="contact-section" id="kontakt">
-            <p class="eyebrow">▶ READY PLAYER?</p>
-            <h2>Pojďme vytvořit<br><span class="accent">něco skvělého.</span></h2>
-            <a class="button button-primary" href="mailto:D24634@oa-opava.cz">POSLAT ZPRÁVU ✉</a>
+            <span class="contact-corner contact-corner-tl">+</span>
+            <span class="contact-corner contact-corner-tr">+</span>
+            <span class="contact-corner contact-corner-bl">+</span>
+            <span class="contact-corner contact-corner-br">+</span>
+
+            <p class="eyebrow blink">▶ READY PLAYER?</p>
+            <h2>Pojďme vytvořit<br><span class="accent">něco skvělého</span><span class="cursor"></span></h2>
+
+            <p class="contact-subtitle">Máš nápad na projekt, nebo si jen chceš popovídat o kódu?<br>Napiš mi –
+                odpovídám do 24 hodin.</p>
+
+            <div class="contact-buttons">
+                <a class="contact-btn contact-btn-primary" href="mailto:D24634@oa-opava.cz">
+                    <span class="contact-btn-icon">✉</span>
+                    <span class="contact-btn-text">POSLAT ZPRÁVU</span>
+                    <span class="contact-btn-arrow">→</span>
+                </a>
+
+                <a class="contact-btn contact-btn-secondary" href="https://github.com/daniel-gorcica" target="_blank"
+                    rel="noopener">
+                    <span class="contact-btn-icon">◇</span>
+                    <span class="contact-btn-text">GITHUB</span>
+                    <span class="contact-btn-arrow">↗</span>
+                </a>
+
+                <a class="contact-btn contact-btn-ghost" href="https://instagram.com/TVUJ_INSTAGRAM" target="_blank"
+                    rel="noopener">
+                    <span class="contact-btn-icon">◉</span>
+                    <span class="contact-btn-text">INSTAGRAM</span>
+                    <span class="contact-btn-arrow">↗</span>
+                </a>
+            </div>
+
+            <p class="contact-status"><span class="status-dot"></span> ONLINE • ODPOVÍDÁM DO 24 HODIN</p>
         </section>
     </main>
 
     <footer>
         <span>© 2026 DANIEL // VŠECHNA PRÁVA VYHRAZENA</span>
+
+        <span class="visitor-badge">
+            <span class="visitor-label">▶ NÁVŠTĚVNÍK #</span>
+            <span class="visitor-count" id="visitor-count">1337</span>
+        </span>
+
         <div class="footer-links">
             <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fdaniel-gorcica.github.io%2Findex.html"
                 target="_blank">HTML5 ✓</a>
@@ -295,6 +335,7 @@
     </footer>
 
     <script>
+        // === 1. OTEVŘENÍ / ZAVŘENÍ MOBILNÍHO MENU ===
         const header = document.querySelector('.site-header');
         const toggle = document.querySelector('.menu-toggle');
 
@@ -307,6 +348,54 @@
         toggle.addEventListener('click', () => setMenu(!header.classList.contains('nav-open')));
         document.querySelectorAll('#hlavni-menu a').forEach(a => a.addEventListener('click', () => setMenu(false)));
         document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+
+        // === 2. HLAVIČKA PŘI SCROLLU ===
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // === 3. AKTIVNÍ ODKAZ V MENU ===
+        const sections = document.querySelectorAll('main > section[id], main > div[id]');
+        const navLinks = document.querySelectorAll('#hlavni-menu a');
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                    });
+                }
+            });
+        }, {
+            rootMargin: '-40% 0px -50% 0px'
+        });
+
+        sections.forEach(section => sectionObserver.observe(section));
+
+        // === 4. POČÍTADLO NÁVŠTĚV ===
+        async function loadVisitorCount() {
+            const el = document.getElementById('visitor-count');
+            if (!el) return;
+
+            const KEY = 'daniel-portfolio-visits';
+            const BASE = 1337; // fiktivní základ pro retro efekt
+
+            try {
+                const res = await fetch('https://api.counterapi.dev/v1/daniel-gorcica-portfolio/visits/up');
+                const data = await res.json();
+                el.textContent = (data.count + BASE).toString().padStart(4, '0');
+            } catch (e) {
+                let count = parseInt(localStorage.getItem(KEY) || '0', 10);
+                if (!sessionStorage.getItem(KEY + '-session')) {
+                    count++;
+                    localStorage.setItem(KEY, count);
+                    sessionStorage.setItem(KEY + '-session', '1');
+                }
+                el.textContent = (count + BASE).toString().padStart(4, '0');
+            }
+        }
+        loadVisitorCount();
     </script>
 
 </body>
