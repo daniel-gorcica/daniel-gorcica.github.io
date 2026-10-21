@@ -41,3 +41,39 @@ Tento projekt vznikl za podpory AI nástroje **Claude (Anthropic)**. AI nebylo p
 ---
 
 *Datum vytvoření citace: 16. 10. 2026*
+
+## Prompty použité při dalších úpravách
+
+Při dalších úpravách portfolia byl použit AI asistent Copilot SDK ve VS Code. Níže jsou uvedeny použité prompty a jejich výsledek:
+
+> Přidej mi tam prosím projekty. Tady máš odkazy:
+> https://daniel-gorcica.github.io/origins/
+> https://daniel-gorcica.github.io/pocasi/
+
+- Do sekce projektů byly přidány karty Origins a Počasí s odkazy na jejich weby.
+
+> Do Origins dej logo.png a do Počasí dej nějaký barevný emoji z internetu zkopírovaný.
+
+- Do karty Origins byl přidán soubor `logo.png`.
+- Karta Počasí dostala barevný symbol počasí.
+
+> Já myslel nějaký mrak se sluncem do toho počasí a větší trochu.
+
+- Symbol v kartě Počasí byl změněn na větší emoji 🌤️ se sluncem a mrakem.
+
+> V sekci O mně odeber, že když najedu na určitý jazyk, tak se ukáže bublina. To tam nechci, a odeber Časté otázky.
+
+- Byly odstraněny tooltipy u dovedností, celá sekce Časté otázky a odkaz FAQ z navigace.
+
+> Nápisy projektů přímo na kartě děj jakoby ne doprostřed, ale dolů.
+
+- Názvy projektů byly přesunuty do spodní části obrazové části karet.
+
+> A v patičce odeber to návštěvník #.
+
+- Ze štítku návštěvníka v patičce byl odstraněn znak `#`.
+
+> Projekty můžeš dát 3 vedle sebe. Commit a push.
+
+- Mřížka projektů byla na větších obrazovkách nastavena na tři karty vedle sebe.
+- Všechny aktuální změny byly commitnuty a odeslány do repozitáře na GitHubu.
