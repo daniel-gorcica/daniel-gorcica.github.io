@@ -506,42 +506,11 @@ h1 {
     color: #ffd166;
 }
 
-.skill-item {
-    position: relative;
-}
-
-.skill-item::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 115%;
-    left: 50%;
-    transform: translateX(-50%) translateY(4px);
-    background: #202844;
-    color: #ffd166;
-    font-family: 'Press Start 2P', monospace;
-    font-size: 7px;
-    padding: 6px 10px;
-    border: 1px solid #ff5c7c;
-    border-radius: 6px;
-    white-space: nowrap;
-    pointer-events: none;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    z-index: 20;
-}
-
-.skill-item:hover::after {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
-}
-
 /* === PROJEKTY === */
 
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 390px));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     justify-content: center;
     gap: 24px;
 }
@@ -618,9 +587,19 @@ h1 {
     transition: transform 0.45s cubic-bezier(.2, .7, .3, 1), color 0.3s ease;
 }
 
+.weather-icon {
+    font-size: 92px !important;
+    line-height: 1;
+}
+
 .project-art i {
+    position: absolute;
+    right: 0;
+    bottom: 18px;
+    left: 0;
     font-size: 11px;
     font-style: normal;
+    text-align: center;
     transition: letter-spacing 0.4s ease;
 }
 
@@ -652,6 +631,14 @@ h1 {
 
 .art-pink {
     background-color: #3a2a4a;
+}
+
+.art-blue {
+    background-color: #304b7a;
+}
+
+.art-cyan {
+    background-color: #286878;
 }
 
 .project-info {
@@ -687,89 +674,6 @@ h1 {
 .project-card:hover .project-link-text {
     color: #ff5c7c;
     letter-spacing: 1.5px;
-}
-
-/* === FAQ === */
-
-.faq-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.faq-item {
-    border: 1px solid #303958;
-    border-radius: 12px;
-    background: rgba(23, 28, 50, .6);
-    overflow: hidden;
-    transition: border-color .3s ease, box-shadow .3s ease;
-}
-
-.faq-item[open] {
-    border-color: #ff5c7c;
-    box-shadow: 0 0 20px rgba(255, 92, 124, .2);
-}
-
-.faq-item summary {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 18px 22px;
-    color: #f7f7ff;
-    font-family: 'Press Start 2P', monospace;
-    font-size: 11px;
-    line-height: 1.5;
-    cursor: pointer;
-    list-style: none;
-    transition: color .3s ease, background .3s ease;
-}
-
-.faq-item summary::-webkit-details-marker {
-    display: none;
-}
-
-.faq-item summary::marker {
-    content: '';
-}
-
-.faq-item summary:hover {
-    color: #ffd166;
-    background: rgba(255, 209, 102, .04);
-}
-
-.faq-marker {
-    color: #ff5c7c;
-    font-size: 10px;
-    transition: transform .3s ease, color .3s ease;
-    flex-shrink: 0;
-}
-
-.faq-item[open] .faq-marker {
-    transform: rotate(90deg);
-    color: #ffd166;
-}
-
-.faq-item p {
-    margin: 0;
-    padding: 0 22px 20px 46px;
-    color: #adb5d0;
-    font-size: 15px;
-    line-height: 1.7;
-    animation: faq-open .4s ease;
-}
-
-@keyframes faq-open {
-    from {
-        opacity: 0;
-        transform: translateY(-8px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 /* === KONTAKT === */
@@ -1446,15 +1350,6 @@ footer {
         padding: 18px;
     }
 
-    .skill-item::after {
-        width: max-content;
-        max-width: min(240px, 70vw);
-        font-size: 8px;
-        line-height: 1.7;
-        text-align: center;
-        white-space: normal;
-    }
-
     .project-grid {
         grid-template-columns: minmax(0, 1fr);
         max-width: 480px;
@@ -1467,17 +1362,6 @@ footer {
 
     .project-art span {
         font-size: 48px;
-    }
-
-    .faq-item summary {
-        padding: 14px 16px;
-        font-size: 10px;
-        gap: 10px;
-    }
-
-    .faq-item p {
-        padding: 0 16px 16px 38px;
-        font-size: 14px;
     }
 
     .contact-section {
