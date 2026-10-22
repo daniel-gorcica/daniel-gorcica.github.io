@@ -56,6 +56,7 @@
     <div class="sunset-sun"></div>
     <div class="moon"></div>
     <div class="sunset-sea"></div>
+    <div class="menu-overlay" aria-hidden="true"></div>
 
     <div class="pixel-stars">
         <span class="pixel-star star-1"></span>
@@ -283,7 +284,7 @@
                 <h2>VYBRANÉ PROJEKTY</h2>
             </div>
             <div class="project-grid">
-                <a href="https://daniel-gorcica.github.io/real_madrid/" target="_blank" class="project-card">
+                <a href="https://daniel-gorcica.github.io/real_madrid/" target="_blank" class="project-card" data-project-card>
                     <article>
                         <div class="project-number">01</div>
                         <div class="project-art art-crimson" style="--bg: url('real_madrid.jpg')">
@@ -296,7 +297,7 @@
                         </div>
                     </article>
                 </a>
-                <a href="https://daniel-gorcica.github.io/projekt1-web/" target="_blank" class="project-card">
+                <a href="https://daniel-gorcica.github.io/projekt1-web/" target="_blank" class="project-card" data-project-card>
                     <article>
                         <div class="project-number">02</div>
                         <div class="project-art art-amber" style="--bg: url('rocket_league.jpg')">
@@ -309,7 +310,7 @@
                         </div>
                     </article>
                 </a>
-                <a href="https://daniel-gorcica.github.io/minecraft/" target="_blank" class="project-card">
+                <a href="https://daniel-gorcica.github.io/minecraft/" target="_blank" class="project-card" data-project-card>
                     <article>
                         <div class="project-number">03</div>
                         <div class="project-art art-pink" style="--bg: url('minecraft.jpg')">
@@ -322,7 +323,7 @@
                         </div>
                     </article>
                 </a>
-                <a href="https://daniel-gorcica.github.io/origins/" target="_blank" class="project-card">
+                <a href="https://daniel-gorcica.github.io/origins/" target="_blank" class="project-card" data-project-card>
                     <article>
                         <div class="project-number">04</div>
                         <div class="project-art art-blue" style="--bg: url('logo.png')">
@@ -335,7 +336,7 @@
                         </div>
                     </article>
                 </a>
-                <a href="https://daniel-gorcica.github.io/pocasi/" target="_blank" class="project-card">
+                <a href="https://daniel-gorcica.github.io/pocasi/" target="_blank" class="project-card" data-project-card>
                     <article>
                         <div class="project-number">05</div>
                         <div class="project-art art-cyan">
@@ -348,8 +349,34 @@
                         </div>
                     </article>
                 </a>
+                <a href="https://daniel-gorcica.github.io/googlesearch/" target="_blank" class="project-card" data-project-card>
+                    <article>
+                        <div class="project-number">06</div>
+                        <div class="project-art art-blue">
+                            <span class="google-logo"><img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google"></span><i>GOOGLE SEARCH</i></div>
+                        <div class="project-info">
+                            <h3>Google Search</h3>
+                            <p>Jednoduchý vyhledávací web s čistým rozhraním a rychlým přístupem k vyhledávání.</p>
+                            <span class="project-tech">HTML / CSS</span>
+                            <span class="project-link-text">ZOBRAZIT ↗</span>
+                        </div>
+                    </article>
+                </a>
             </div>
         </section>
+
+        <dialog class="project-dialog" id="project-dialog" aria-labelledby="project-dialog-title">
+            <div class="project-dialog-content">
+                <button class="project-dialog-close" type="button" aria-label="Zavřít detail">×</button>
+                <span class="project-dialog-number" id="project-dialog-number"></span>
+                <p class="eyebrow">▶ DETAIL PROJEKTU</p>
+                <h2 id="project-dialog-title"></h2>
+                <p class="project-dialog-description" id="project-dialog-description"></p>
+                <p class="project-dialog-tech" id="project-dialog-tech"></p>
+                <a class="button button-primary project-dialog-link" id="project-dialog-link" target="_blank"
+                    rel="noopener">OTEVŘÍT PROJEKT ↗</a>
+            </div>
+        </dialog>
 
         <section class="contact-section reveal" id="kontakt">
             <span class="contact-corner contact-corner-tl">+</span>
@@ -392,11 +419,6 @@
     <footer>
         <span>© 2026 DANIEL // VŠECHNA PRÁVA VYHRAZENA</span>
 
-        <span class="visitor-badge">
-            <span class="visitor-label">▶ NÁVŠTĚVNÍK</span>
-            <span class="visitor-count" id="visitor-count">1337</span>
-        </span>
-
         <div class="footer-links">
             <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fdaniel-gorcica.github.io%2F" target="_blank"
                 rel="noopener">HTML5 ✓</a>
@@ -420,12 +442,14 @@
 
         function setMenu(open) {
             header.classList.toggle('nav-open', open);
+            document.body.classList.toggle('menu-open', open);
             toggle.setAttribute('aria-expanded', open);
             toggle.setAttribute('aria-label', open ? 'Zavřít menu' : 'Otevřít menu');
         }
 
         toggle.addEventListener('click', () => setMenu(!header.classList.contains('nav-open')));
         document.querySelectorAll('#hlavni-menu a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+        document.querySelector('.menu-overlay').addEventListener('click', () => setMenu(false));
         document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
 
         window.addEventListener('scroll', () => {
@@ -450,28 +474,30 @@
 
         sections.forEach(section => sectionObserver.observe(section));
 
-        async function loadVisitorCount() {
-            const el = document.getElementById('visitor-count');
-            if (!el) return;
+        const projectDialog = document.getElementById('project-dialog');
+        const projectDialogTitle = document.getElementById('project-dialog-title');
+        const projectDialogNumber = document.getElementById('project-dialog-number');
+        const projectDialogDescription = document.getElementById('project-dialog-description');
+        const projectDialogTech = document.getElementById('project-dialog-tech');
+        const projectDialogLink = document.getElementById('project-dialog-link');
+        const projectDialogClose = projectDialog.querySelector('.project-dialog-close');
 
-            const KEY = 'daniel-portfolio-visits';
-            const BASE = 1337;
+        document.querySelectorAll('[data-project-card]').forEach(card => {
+            card.addEventListener('click', event => {
+                event.preventDefault();
+                projectDialogTitle.textContent = card.querySelector('h3').textContent;
+                projectDialogNumber.textContent = card.querySelector('.project-number').textContent;
+                projectDialogDescription.textContent = card.querySelector('.project-info p').textContent;
+                projectDialogTech.textContent = card.querySelector('.project-tech').textContent;
+                projectDialogLink.href = card.href;
+                projectDialog.showModal();
+            });
+        });
 
-            try {
-                const res = await fetch('https://api.counterapi.dev/v1/daniel-gorcica-portfolio/visits/up');
-                const data = await res.json();
-                el.textContent = (data.count + BASE).toString().padStart(4, '0');
-            } catch (e) {
-                let count = parseInt(localStorage.getItem(KEY) || '0', 10);
-                if (!sessionStorage.getItem(KEY + '-session')) {
-                    count++;
-                    localStorage.setItem(KEY, count);
-                    sessionStorage.setItem(KEY + '-session', '1');
-                }
-                el.textContent = (count + BASE).toString().padStart(4, '0');
-            }
-        }
-        loadVisitorCount();
+        projectDialogClose.addEventListener('click', () => projectDialog.close());
+        projectDialog.addEventListener('click', event => {
+            if (event.target === projectDialog) projectDialog.close();
+        });
 
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {

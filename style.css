@@ -142,6 +142,25 @@ footer {
         box-shadow .35s ease;
 }
 
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    background: rgba(5, 6, 16, .72);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease;
+}
+
+body.menu-open {
+    overflow: hidden;
+}
+
+body.menu-open .menu-overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 .site-header.scrolled {
     background: rgba(13, 16, 32, .94);
     backdrop-filter: blur(10px);
@@ -676,6 +695,66 @@ h1 {
     letter-spacing: 1.5px;
 }
 
+.project-dialog {
+    width: min(520px, calc(100% - 32px));
+    padding: 0;
+    border: 1px solid #ff5c7c;
+    border-radius: 14px;
+    color: #f7f7ff;
+    background: #171c32;
+    box-shadow: 0 0 40px rgba(255, 92, 124, .35);
+}
+
+.project-dialog::backdrop {
+    background: rgba(5, 6, 16, .78);
+    backdrop-filter: blur(4px);
+}
+
+.project-dialog-content {
+    position: relative;
+    padding: 34px;
+}
+
+.project-dialog-close {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    border: 0;
+    color: #ffd166;
+    background: transparent;
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.project-dialog-number {
+    display: block;
+    margin-bottom: 18px;
+    color: #ffd166;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+}
+
+.project-dialog h2 {
+    margin: 0 0 16px;
+}
+
+.project-dialog-description {
+    margin: 0 0 18px;
+    color: #adb5d0;
+}
+
+.project-dialog-tech {
+    margin: 0 0 24px;
+    color: #ff5c7c;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+}
+
+.project-dialog-link {
+    margin-top: 4px;
+}
+
 /* === KONTAKT === */
 
 .contact-section {
@@ -939,52 +1018,6 @@ nav a.active::after {
     }
 }
 
-/* === POČÍTADLO NÁVŠTĚV === */
-
-.visitor-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 12px;
-    border: 1px solid #303958;
-    border-radius: 6px;
-    background: rgba(13, 16, 32, .6);
-    font-family: 'Press Start 2P', monospace;
-    font-size: 8px;
-    letter-spacing: .5px;
-}
-
-.visitor-label {
-    color: #ff5c7c;
-}
-
-.visitor-count {
-    color: #ffd166;
-    text-shadow: 0 0 6px rgba(255, 209, 102, .6);
-    animation: visitor-flicker 4s steps(1) infinite;
-}
-
-@keyframes visitor-flicker {
-
-    0%,
-    92%,
-    100% {
-        opacity: 1;
-    }
-
-    94% {
-        opacity: .4;
-    }
-
-    96% {
-        opacity: 1;
-    }
-
-    98% {
-        opacity: .6;
-    }
-}
-
 /* === FADE-UP === */
 
 .js .reveal {
@@ -1017,8 +1050,50 @@ nav a.active::after {
     height: 300px;
     border-radius: 50%;
     background: repeating-linear-gradient(to bottom, #ffc857 0 18px, #ffb044 18px 34px, #ff7a45 34px 50px, #ff334f 50px 68px);
-    box-shadow: 0 0 45px rgba(255, 92, 124, .45);
+    box-shadow:
+        0 0 35px rgba(255, 209, 102, .7),
+        0 0 90px rgba(255, 92, 124, .55),
+        0 0 180px rgba(255, 92, 124, .25);
     transform: translate(-50%, 0);
+}
+
+.sunset-sun::before,
+.sunset-sun::after {
+    position: absolute;
+    content: '';
+    pointer-events: none;
+}
+
+.sunset-sun::before {
+    inset: -38px;
+    border: 2px solid rgba(255, 209, 102, .18);
+    border-radius: 50%;
+    box-shadow:
+        0 -34px 0 -32px rgba(255, 209, 102, .55),
+        0 34px 0 -32px rgba(255, 209, 102, .55),
+        34px 0 0 -32px rgba(255, 209, 102, .55),
+        -34px 0 0 -32px rgba(255, 209, 102, .55);
+    animation: sun-pulse 4s ease-in-out infinite;
+}
+
+.sunset-sun::after {
+    inset: 24px;
+    border: 1px solid rgba(255, 241, 220, .28);
+    border-radius: 50%;
+    background: repeating-linear-gradient(to bottom, transparent 0 16px, rgba(255, 241, 220, .1) 16px 18px);
+}
+
+@keyframes sun-pulse {
+    0%,
+    100% {
+        opacity: .55;
+        transform: scale(.96);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.04);
+    }
 }
 
 .moon {
@@ -1046,7 +1121,9 @@ nav a.active::after {
     left: 60px;
     width: 36px;
     height: 26px;
-    box-shadow: 75px 15px 0 -6px #b8bad0, 35px 88px 0 -3px #b8bad0;
+    box-shadow:
+        75px 15px 0 -6px #b8bad0,
+        35px 88px 0 -3px #b8bad0;
 }
 
 .moon::after {
@@ -1054,7 +1131,9 @@ nav a.active::after {
     left: 68px;
     width: 22px;
     height: 15px;
-    box-shadow: 66px -50px 0 -4px #b8bad0, -25px -40px 0 -7px #b8bad0;
+    box-shadow:
+        66px -50px 0 -4px #b8bad0,
+        -25px -40px 0 -7px #b8bad0;
 }
 
 .sunset-sea {
@@ -1063,7 +1142,9 @@ nav a.active::after {
     bottom: 0;
     left: 0;
     border-top: 1px solid rgba(255, 200, 87, .35);
-    background: linear-gradient(to bottom, rgba(37, 41, 77, .45), rgba(13, 16, 32, .9));
+    background:
+        linear-gradient(to bottom, rgba(37, 41, 77, .45), rgba(13, 16, 32, .9)),
+        linear-gradient(90deg, transparent 35%, rgba(255, 209, 102, .08) 50%, transparent 65%);
 }
 
 main,
@@ -1222,7 +1303,7 @@ footer {
         top: 100%;
         right: 0;
         left: 0;
-        display: none;
+        display: flex;
         flex-direction: column;
         gap: 0;
         padding: 6px 14px 10px;
@@ -1233,10 +1314,16 @@ footer {
         box-shadow: 0 14px 30px rgba(0, 0, 0, .45);
         font-size: 12px;
         overflow: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-10px);
+        transition: opacity .25s ease, transform .25s ease;
     }
 
     .nav-open nav {
-        display: flex;
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
     }
 
     .site-header.nav-open {
@@ -1396,11 +1483,6 @@ footer {
         text-align: center;
     }
 
-    .visitor-badge {
-        font-size: 7px;
-        padding: 5px 10px;
-    }
-
     .footer-links {
         flex-wrap: wrap;
         justify-content: center;
@@ -1427,7 +1509,8 @@ footer {
 
     .blink,
     .pixel-avatar,
-    .pixel-star {
+    .pixel-star,
+    .sunset-sun::before {
         animation: none;
     }
 
@@ -1459,10 +1542,6 @@ footer {
     .contact-btn:hover .contact-btn-icon,
     .contact-btn:hover .contact-btn-arrow {
         transform: none;
-    }
-
-    .visitor-count {
-        animation: none;
     }
 
     .js .reveal {
