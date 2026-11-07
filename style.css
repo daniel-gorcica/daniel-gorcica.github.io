@@ -191,8 +191,17 @@ footer {
 }
 
 .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
     color: #ffd166;
     font-size: 14px;
+}
+
+.logo img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
 }
 
 .logo span,
