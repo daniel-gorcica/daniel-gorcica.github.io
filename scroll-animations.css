@@ -1,16 +1,8 @@
 @charset "UTF-8";
 
 /* === SCROLL ANIMACE ===
-   Moderní CSS vlastnosti (2023+), které W3C validátor zatím nezná.
-   Proto jsou v samostatném souboru. Vše funguje v Chrome, Edge, Safari. */
-
-/* Scroll progress bar – roste podle scrollu */
-.scroll-progress {
-    animation:
-        scroll-grow linear both,
-        scroll-shine 3s linear infinite;
-    animation-timeline: scroll(root), auto;
-}
+   Moderní CSS (animation-timeline), které W3C validátor nezná,
+   proto je v samostatném souboru. */
 
 @keyframes scroll-grow {
     from {
@@ -32,32 +24,40 @@
     }
 }
 
-/* Slunce a měsíc se hýbou podle scrollu */
+/* slunce zapadá dolů */
 @keyframes sun-scroll {
     from {
-        opacity: 1;
-        transform: translate(-50%, 0) scale(.92);
+        opacity: .55;
+        transform: translate(-50%, 0) scale(.95);
     }
 
     to {
         opacity: 0;
-        transform: translate(-50%, 180px) scale(0.48);
+        transform: translate(-50%, 200px) scale(.5);
     }
 }
 
+/* měsíc vychází shora */
 @keyframes moon-scroll {
     from {
         opacity: 0;
-        transform: translate(-50%, -180px) scale(0.48);
+        transform: translate(-50%, -200px) scale(.5);
     }
 
     to {
-        opacity: 1;
+        opacity: .65;
         transform: translate(-50%, 0) scale(1);
     }
 }
 
 @supports (animation-timeline: scroll()) {
+    .scroll-progress {
+        animation:
+            scroll-grow linear both,
+            scroll-shine 3s linear infinite;
+        animation-timeline: scroll(root), auto;
+    }
+
     .sunset-sun {
         animation: sun-scroll linear both;
         animation-timeline: scroll(root);
@@ -68,5 +68,13 @@
         animation: moon-scroll linear both;
         animation-timeline: scroll(root);
         animation-range: 500px 1200px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .sunset-sun,
+    .moon {
+        animation: none;
     }
 }

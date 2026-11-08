@@ -1,13 +1,10 @@
-document.documentElement.classList.add('js');
-
-// Scroll animace – načteno dynamicky, aby to W3C validátor neviděl
-const scrollAnim = document.createElement('link');
-scrollAnim.rel = 'stylesheet';
-scrollAnim.href = 'scroll-animations.css';
-document.head.appendChild(scrollAnim);
-
 const header = document.querySelector('.site-header');
 const toggle = document.querySelector('.menu-toggle');
+const pageLoader = document.getElementById('page-loader');
+
+window.addEventListener('load', () => {
+    window.setTimeout(() => pageLoader.classList.add('is-hidden'), 450);
+});
 
 function setMenu(open) {
     header.classList.toggle('nav-open', open);
@@ -21,9 +18,15 @@ document.querySelectorAll('#hlavni-menu a').forEach(a => a.addEventListener('cli
 document.querySelector('.menu-overlay').addEventListener('click', () => setMenu(false));
 document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
 
+let scrollTicking = false;
 window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 50);
-});
+    if (scrollTicking) return;
+    scrollTicking = true;
+    requestAnimationFrame(() => {
+        header.classList.toggle('scrolled', window.scrollY > 50);
+        scrollTicking = false;
+    });
+}, { passive: true });
 
 const sections = document.querySelectorAll('main > section[id], main > div[id]');
 const navLinks = document.querySelectorAll('#hlavni-menu a');
@@ -53,6 +56,8 @@ const projectDialogClose = projectDialog.querySelector('.project-dialog-close');
 
 document.querySelectorAll('[data-project-card]').forEach(card => {
     card.addEventListener('click', event => {
+        // Ctrl/Cmd/Shift + klik nebo prostřední tlačítko = nechat prohlížeč otevřít odkaz normálně
+        if (event.ctrlKey || event.metaKey || event.shiftKey || event.button !== 0) return;
         event.preventDefault();
         projectDialogTitle.textContent = card.querySelector('h3').textContent;
         projectDialogNumber.textContent = card.querySelector('.project-number').textContent;
@@ -80,3 +85,23 @@ const revealObserver = new IntersectionObserver((entries) => {
 });
 
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* Počítání čísel ve statistikách */
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('[data-count]').forEach(el => {
+        const target = Number(el.dataset.count);
+        el.textContent = '0';
+        const obs = new IntersectionObserver(([entry]) => {
+            if (!entry.isIntersecting) return;
+            obs.disconnect();
+            const start = performance.now();
+            const tick = now => {
+                const p = Math.min((now - start) / 1400, 1);
+                el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+                if (p < 1) requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+        }, { threshold: 0.6 });
+        obs.observe(el);
+    });
+}
