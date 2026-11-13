@@ -22,6 +22,7 @@ html {
 }
 
 body {
+    position: relative;
     margin: 0;
     color: var(--text);
     background:
@@ -214,53 +215,40 @@ h3,
     animation-direction: alternate-reverse;
 }
 
-/* slunce a měsíc na pozadí (pohyb při scrollu je v scroll-animations.css) */
-.sunset-sun,
-.moon {
-    position: fixed;
-    z-index: 0;
-    left: 50%;
-    border-radius: 50%;
-    pointer-events: none;
-    transform: translate(-50%, 0);
-}
-
-.sunset-sun {
-    top: calc(50vh - 150px);
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle at 35% 30%, #fff3b0 0%, var(--a2) 28%, var(--a1) 62%, var(--a3) 100%);
-    box-shadow: 0 0 60px rgba(255, 200, 100, .55), 0 0 160px rgba(255, 111, 181, .35);
-}
-
-.sunset-sun::before {
-    content: '';
+/* hrubý světelný proud pohybující se se scrollováním */
+.light-stream-wrap {
     position: absolute;
-    inset: -36px;
-    border: 2px solid rgba(255, 226, 122, .35);
-    border-radius: 50%;
-    animation: sunpulse 4s ease-in-out infinite;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
 }
 
-@keyframes sunpulse {
-    50% {
-        transform: scale(1.08);
-        opacity: .35;
-    }
+.light-stream-svg {
+    width: 100%;
+    height: 100%;
 }
 
-.moon {
-    top: calc(50vh - 130px);
-    width: 260px;
-    height: 260px;
-    opacity: 0;
-    background:
-        radial-gradient(circle at 32% 34%, rgba(150, 160, 205, .55) 0 7%, transparent 8%),
-        radial-gradient(circle at 66% 28%, rgba(150, 160, 205, .45) 0 5%, transparent 6%),
-        radial-gradient(circle at 58% 66%, rgba(150, 160, 205, .5) 0 10%, transparent 11%),
-        radial-gradient(circle at 28% 70%, rgba(150, 160, 205, .4) 0 4%, transparent 5%),
-        radial-gradient(circle at 35% 30%, #ffffff, #d6dcff 55%, var(--a4) 130%);
-    box-shadow: 0 0 60px rgba(122, 215, 255, .45), 0 0 150px rgba(150, 130, 255, .3);
+.stream-glow-line,
+.stream-core-line {
+    fill: none;
+    stroke: url(#stream-grad);
+    stroke-linecap: round;
+    stroke-dasharray: 4200;
+    stroke-dashoffset: var(--stream-offset, 3800);
+}
+
+.stream-glow-line {
+    stroke-width: 32;
+    opacity: .55;
+    filter: url(#stream-glow);
+}
+
+.stream-core-line {
+    stroke-width: 7;
 }
 
 .scroll-progress {
@@ -448,7 +436,8 @@ body.menu-open .menu-overlay {
 }
 
 .button-secondary {
-    background: var(--card);
+    background: rgba(38, 38, 64, .75);
+    backdrop-filter: blur(10px);
 }
 
 .button-secondary:hover {
@@ -494,7 +483,8 @@ body.menu-open .menu-overlay {
     padding: 6px 14px;
     border: 1px solid var(--line);
     border-radius: 999px;
-    background: var(--card);
+    background: rgba(38, 38, 64, .75);
+    backdrop-filter: blur(10px);
     color: var(--muted);
     font-size: 14px;
 }
@@ -579,7 +569,8 @@ h1 {
     padding: 12px 20px;
     border: 1px solid var(--line);
     border-radius: 16px;
-    background: var(--card);
+    background: rgba(38, 38, 64, .8);
+    backdrop-filter: blur(10px);
     color: var(--a2);
     font-family: 'Space Grotesk', monospace;
     font-size: 28px;
@@ -588,14 +579,15 @@ h1 {
     animation-delay: -4s;
 }
 
-/* statistiky */
+/* statistiky – skleněný efekt */
 .stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     padding: 28px 10px;
     border: 1px solid var(--line);
     border-radius: 22px;
-    background: var(--card);
+    background: rgba(38, 38, 64, .72);
+    backdrop-filter: blur(14px);
     text-align: center;
 }
 
@@ -646,7 +638,8 @@ h2 {
     padding: 28px;
     border: 1px solid var(--line);
     border-radius: 22px;
-    background: var(--card);
+    background: rgba(38, 38, 64, .72);
+    backdrop-filter: blur(14px);
 }
 
 .panel-label {
@@ -697,7 +690,7 @@ h2 {
     width: var(--v);
 }
 
-/* projekty – 3 vedle sebe, poslední dvě vycentrované */
+/* projekty – 3 vedle sebe, poslední dvě vycentrované, skleněný efekt + 3D náklon */
 .project-grid {
     display: grid;
     grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -711,7 +704,9 @@ h2 {
     overflow: hidden;
     border: 1px solid var(--line);
     border-radius: 22px;
-    background: var(--card);
+    background: rgba(38, 38, 64, .72);
+    backdrop-filter: blur(14px);
+    transform-style: preserve-3d;
     transition: transform .35s cubic-bezier(.2, .7, .3, 1), border-color .3s, box-shadow .3s;
 }
 
@@ -928,7 +923,8 @@ h2 {
     padding: 60px 30px;
     border: 1px solid var(--line);
     border-radius: 28px;
-    background: radial-gradient(circle at 50% 0, rgba(255, 111, 181, .2), transparent 60%), var(--card);
+    background: radial-gradient(circle at 50% 0, rgba(255, 111, 181, .2), transparent 60%), rgba(38, 38, 64, .75);
+    backdrop-filter: blur(14px);
     text-align: center;
     scroll-margin-top: 100px;
 }
@@ -1006,16 +1002,12 @@ footer {
 
 /* mobil */
 @media (max-width: 760px) {
-    .sunset-sun {
-        width: 220px;
-        height: 220px;
-        top: calc(50vh - 110px);
+    .light-stream-wrap {
+        opacity: .7;
     }
 
-    .moon {
-        width: 190px;
-        height: 190px;
-        top: calc(50vh - 95px);
+    .stream-glow-line {
+        stroke-width: 22;
     }
 
     .site-header,
@@ -1151,6 +1143,10 @@ footer {
     *::after {
         animation: none !important;
         transition: none !important;
+    }
+
+    .light-stream-wrap {
+        display: none;
     }
 
     .js .reveal {

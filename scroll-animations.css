@@ -24,29 +24,14 @@
     }
 }
 
-/* slunce zapadá dolů */
-@keyframes sun-scroll {
+/* světelný proud se vykresluje při scrollování */
+@keyframes stream-draw {
     from {
-        opacity: .55;
-        transform: translate(-50%, 0) scale(.95);
+        stroke-dashoffset: 3800;
     }
 
     to {
-        opacity: 0;
-        transform: translate(-50%, 200px) scale(.5);
-    }
-}
-
-/* měsíc vychází shora */
-@keyframes moon-scroll {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -200px) scale(.5);
-    }
-
-    to {
-        opacity: .65;
-        transform: translate(-50%, 0) scale(1);
+        stroke-dashoffset: 0;
     }
 }
 
@@ -58,23 +43,17 @@
         animation-timeline: scroll(root), auto;
     }
 
-    .sunset-sun {
-        animation: sun-scroll linear both;
+    .stream-glow-line,
+    .stream-core-line {
+        animation: stream-draw linear both;
         animation-timeline: scroll(root);
-        animation-range: 0px 600px;
-    }
-
-    .moon {
-        animation: moon-scroll linear both;
-        animation-timeline: scroll(root);
-        animation-range: 500px 1200px;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
 
-    .sunset-sun,
-    .moon {
+    .stream-glow-line,
+    .stream-core-line {
         animation: none;
     }
 }

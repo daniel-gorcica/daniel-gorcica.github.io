@@ -56,7 +56,6 @@ const projectDialogClose = projectDialog.querySelector('.project-dialog-close');
 
 document.querySelectorAll('[data-project-card]').forEach(card => {
     card.addEventListener('click', event => {
-        // Ctrl/Cmd/Shift + klik nebo prostřední tlačítko = nechat prohlížeč otevřít odkaz normálně
         if (event.ctrlKey || event.metaKey || event.shiftKey || event.button !== 0) return;
         event.preventDefault();
         projectDialogTitle.textContent = card.querySelector('h3').textContent;
@@ -103,5 +102,38 @@ if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
             requestAnimationFrame(tick);
         }, { threshold: 0.6 });
         obs.observe(el);
+    });
+}
+
+/* Světelný proud – záložní výpočet pro prohlížeče bez CSS scroll-timeline (Safari/Firefox) */
+const supportsScrollTimeline = typeof CSS !== 'undefined' && CSS.supports('animation-timeline: scroll()');
+const streamLines = document.querySelectorAll('.stream-glow-line, .stream-core-line');
+
+function updateLightStream() {
+    if (supportsScrollTimeline || !streamLines.length) return;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = maxScroll > 0 ? Math.min(Math.max(window.scrollY / maxScroll, 0), 1) : 0;
+    const offset = Math.round((1 - progress) * 3800);
+    streamLines.forEach(line => line.style.setProperty('--stream-offset', offset));
+}
+
+if (!supportsScrollTimeline) {
+    window.addEventListener('scroll', () => requestAnimationFrame(updateLightStream), { passive: true });
+    updateLightStream();
+}
+
+/* 3D skleněný náklon karet projektů (Tilting glass effect) */
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && window.matchMedia('(hover: hover)').matches) {
+    document.querySelectorAll('.project-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            card.style.transform = `perspective(900px) rotateX(${(-y * 8).toFixed(2)}deg) rotateY(${(x * 8).toFixed(2)}deg) translateY(-6px)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+        });
     });
 }

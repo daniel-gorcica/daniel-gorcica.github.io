@@ -29,16 +29,42 @@
 <body>
     <div class="page-loader" id="page-loader" role="status" aria-label="Načítání stránky">
         <div class="loader-orbit">
-            <span class="loader-core">&lt;/&gt;</span>
+            <span class="loader-core"></></span>
         </div>
         <p class="loader-label">Načítám portfolio</p>
         <div class="loader-track"><span></span></div>
     </div>
     <div class="scroll-progress" aria-hidden="true"></div>
-    <div class="sunset-sun" aria-hidden="true"></div>
-    <div class="moon" aria-hidden="true"></div>
     <div class="glow glow-1" aria-hidden="true"></div>
     <div class="glow glow-2" aria-hidden="true"></div>
+
+    <!-- Hrubší světelný proud posunující se se scrollováním -->
+    <div class="light-stream-wrap" aria-hidden="true">
+        <svg class="light-stream-svg" viewBox="0 0 1440 3200" preserveAspectRatio="none">
+            <defs>
+                <linearGradient id="stream-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#ffe27a" />
+                    <stop offset="30%" stop-color="#ff8f5a" />
+                    <stop offset="65%" stop-color="#ff6fb5" />
+                    <stop offset="100%" stop-color="#7ad7ff" />
+                </linearGradient>
+                <filter id="stream-glow" x="-30%" y="-10%" width="160%" height="120%">
+                    <feGaussianBlur stdDeviation="24" result="blur" />
+                    <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+            </defs>
+            <!-- Široká zářící stopa -->
+            <path class="stream-glow-line"
+                d="M 720 0 C 1350 400, 1300 900, 680 1300 C 100 1700, 250 2200, 780 2600 C 1300 2900, 1100 3100, 720 3200" />
+            <!-- Hrubý hlavní paprsek -->
+            <path class="stream-core-line"
+                d="M 720 0 C 1350 400, 1300 900, 680 1300 C 100 1700, 250 2200, 780 2600 C 1300 2900, 1100 3100, 720 3200" />
+        </svg>
+    </div>
+
     <div class="menu-overlay" aria-hidden="true"></div>
 
     <header class="site-header">
@@ -59,7 +85,7 @@
                 <span class="shape shape-1"></span>
                 <span class="shape shape-2"></span>
                 <span class="shape shape-3"></span>
-                <span class="shape shape-4">&lt;/&gt;</span>
+                <span class="shape shape-4"></></span>
             </div>
             <div class="hero-copy">
                 <p class="eyebrow"><span class="status-dot"></span> Otevřený novým projektům</p>
@@ -104,8 +130,8 @@
         <section class="content-section reveal" id="projekty">
             <h2 class="section-label">02 — Vybrané projekty</h2>
             <div class="project-grid">
-                <a href="https://daniel-gorcica.github.io/origins/" target="_blank" rel="noopener"
-                    class="project-card" data-project-card>
+                <a href="https://daniel-gorcica.github.io/origins/" target="_blank" rel="noopener" class="project-card"
+                    data-project-card>
                     <article>
                         <div class="project-number">01</div>
                         <div class="project-art"><img class="project-image" src="images/logo.png"
@@ -119,8 +145,8 @@
                         </div>
                     </article>
                 </a>
-                <a href="https://daniel-gorcica.github.io/999/" target="_blank" rel="noopener"
-                    class="project-card" data-project-card>
+                <a href="https://daniel-gorcica.github.io/999/" target="_blank" rel="noopener" class="project-card"
+                    data-project-card>
                     <article>
                         <div class="project-number">02</div>
                         <div class="project-art"><img class="project-image" src="images/999-logo.png"
@@ -191,8 +217,8 @@
                     class="project-card" data-project-card>
                     <article>
                         <div class="project-number">07</div>
-                        <div class="project-art"><img class="project-image" src="images/minecraft.jpg"
-                                alt="Minecraft"></div>
+                        <div class="project-art"><img class="project-image" src="images/minecraft.jpg" alt="Minecraft">
+                        </div>
                         <div class="project-info">
                             <h3>Minecraft</h3>
                             <p>Fanouškovský web o Minecraftu s glass morphism designem, dimenzemi a vlastním skinem.</p>
@@ -225,7 +251,8 @@
                 <h2 id="project-dialog-title">Detail projektu</h2>
                 <p class="project-dialog-description" id="project-dialog-description"></p>
                 <p class="project-dialog-tech" id="project-dialog-tech"></p>
-                <a class="button button-primary" id="project-dialog-link" href="#" target="_blank" rel="noopener">Otevřít
+                <a class="button button-primary" id="project-dialog-link" href="#" target="_blank"
+                    rel="noopener">Otevřít
                     projekt ↗</a>
             </div>
         </dialog>
@@ -237,8 +264,8 @@
                 do 24 hodin.</p>
             <div class="contact-buttons">
                 <a class="button button-primary" href="mailto:D24634@oa-opava.cz">Poslat zprávu →</a>
-                <a class="button button-secondary" href="https://github.com/repos" target="_blank"
-                    rel="noopener">GitHub ↗</a>
+                <a class="button button-secondary" href="https://github.com/repos" target="_blank" rel="noopener">GitHub
+                    ↗</a>
             </div>
         </section>
     </main>
