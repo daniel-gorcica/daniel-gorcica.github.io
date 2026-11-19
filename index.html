@@ -29,7 +29,7 @@
 <body>
     <div class="page-loader" id="page-loader" role="status" aria-label="Načítání stránky">
         <div class="loader-orbit">
-            <span class="loader-core"></></span>
+            <span class="loader-core">DG</span>
         </div>
         <p class="loader-label">Načítám portfolio</p>
         <div class="loader-track"><span></span></div>
@@ -37,33 +37,6 @@
     <div class="scroll-progress" aria-hidden="true"></div>
     <div class="glow glow-1" aria-hidden="true"></div>
     <div class="glow glow-2" aria-hidden="true"></div>
-
-    <!-- Hrubší světelný proud posunující se se scrollováním -->
-    <div class="light-stream-wrap" aria-hidden="true">
-        <svg class="light-stream-svg" viewBox="0 0 1440 3200" preserveAspectRatio="none">
-            <defs>
-                <linearGradient id="stream-grad" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stop-color="#ffe27a" />
-                    <stop offset="30%" stop-color="#ff8f5a" />
-                    <stop offset="65%" stop-color="#ff6fb5" />
-                    <stop offset="100%" stop-color="#7ad7ff" />
-                </linearGradient>
-                <filter id="stream-glow" x="-30%" y="-10%" width="160%" height="120%">
-                    <feGaussianBlur stdDeviation="24" result="blur" />
-                    <feMerge>
-                        <feMergeNode in="blur" />
-                        <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                </filter>
-            </defs>
-            <!-- Široká zářící stopa -->
-            <path class="stream-glow-line"
-                d="M 720 0 C 1350 400, 1300 900, 680 1300 C 100 1700, 250 2200, 780 2600 C 1300 2900, 1100 3100, 720 3200" />
-            <!-- Hrubý hlavní paprsek -->
-            <path class="stream-core-line"
-                d="M 720 0 C 1350 400, 1300 900, 680 1300 C 100 1700, 250 2200, 780 2600 C 1300 2900, 1100 3100, 720 3200" />
-        </svg>
-    </div>
 
     <div class="menu-overlay" aria-hidden="true"></div>
 
@@ -81,11 +54,44 @@
 
     <main>
         <section class="hero" id="domu">
-            <div class="hero-shapes" aria-hidden="true">
-                <span class="shape shape-1"></span>
-                <span class="shape shape-2"></span>
-                <span class="shape shape-3"></span>
-                <span class="shape shape-4"></></span>
+            <canvas class="hero-canvas" aria-hidden="true"></canvas>
+            <div class="hero-visual" role="img" aria-label="Ukázka pracovního postupu: nápad, návrh a hotový web">
+                <span class="visual-orbit visual-orbit-one"></span>
+                <span class="visual-orbit visual-orbit-two"></span>
+                <div class="workflow-window">
+                    <div class="window-bar">
+                        <span class="window-brand"><i></i> DANIEL / WORKSPACE</span>
+                        <span class="window-live">LIVE PREVIEW</span>
+                    </div>
+                    <div class="workflow-heading">
+                        <div><small>Pracovní postup / 01</small><strong>Od nápadu k webu</strong></div>
+                        <span>01 — 03</span>
+                    </div>
+                    <div class="workflow-list">
+                        <div class="workflow-node">
+                            <span class="workflow-icon">01</span>
+                            <div><small>01 / koncepce</small><strong>Nápad a plán</strong></div>
+                            <b>hotovo</b>
+                        </div>
+                        <div class="workflow-link"><span></span></div>
+                        <div class="workflow-node">
+                            <span class="workflow-icon">02</span>
+                            <div><small>02 / vývoj</small><strong>Návrh v kódu</strong></div>
+                            <b>probíhá</b>
+                        </div>
+                        <div class="workflow-link"><span></span></div>
+                        <div class="workflow-node">
+                            <span class="workflow-icon">03</span>
+                            <div><small>03 / výsledek</small><strong>Hotový web</strong></div>
+                            <b>připraveno</b>
+                        </div>
+                    </div>
+                    <div class="window-footer">
+                        <span>PORTFOLIO / 2026</span>
+                        <span>READY TO SHIP <i></i></span>
+                    </div>
+                </div>
+                <div class="preview-chip"><span>✦</span> Každý detail má svůj důvod</div>
             </div>
             <div class="hero-copy">
                 <p class="eyebrow"><span class="status-dot"></span> Otevřený novým projektům</p>
@@ -101,7 +107,7 @@
 
         <div class="stats reveal">
             <div><strong data-count="3">3</strong><span>roky učení</span></div>
-            <div><strong data-count="8">8</strong><span>dokončených projektů</span></div>
+            <div><strong data-count="9">9</strong><span>dokončených projektů</span></div>
             <div><strong>∞</strong><span>chuti tvořit</span></div>
         </div>
 
@@ -130,17 +136,17 @@
         <section class="content-section reveal" id="projekty">
             <h2 class="section-label">02 — Vybrané projekty</h2>
             <div class="project-grid">
-                <a href="https://daniel-gorcica.github.io/origins/" target="_blank" rel="noopener" class="project-card"
+                
+                                <a href="https://daniel-gorcica.github.io/kimi/" target="_blank" rel="noopener" class="project-card"
                     data-project-card>
                     <article>
                         <div class="project-number">01</div>
-                        <div class="project-art"><img class="project-image" src="images/logo.png"
-                                alt="Assassin's Creed Origins"></div>
+                        <div class="project-art"><img class="project-image project-mercedes" src="images/mercedes-star.svg"
+                                alt="Mercedes-Benz"></div>
                         <div class="project-info">
-                            <h3>Origins</h3>
-                            <p>Fanouškovský web o hře Assassin's Creed Origins – starověký Egypt, hlavní hrdina Bayek a
-                                svět hry.</p>
-                            <span class="project-tech">HTML / CSS</span>
+                            <h3>Kimi Antonelli</h3>
+                            <p>Fanouškovský web o Kimim Antonellim, Mercedes-AMG a světě Formule 1.</p>
+                            <span class="project-tech">HTML / CSS / JS</span>
                             <span class="project-link-text">Zobrazit ↗</span>
                         </div>
                     </article>
@@ -159,10 +165,25 @@
                         </div>
                     </article>
                 </a>
+                <a href="https://daniel-gorcica.github.io/origins/" target="_blank" rel="noopener" class="project-card"
+                    data-project-card>
+                    <article>
+                        <div class="project-number">03</div>
+                        <div class="project-art"><img class="project-image" src="images/logo.png"
+                                alt="Assassin's Creed Origins"></div>
+                        <div class="project-info">
+                            <h3>Origins</h3>
+                            <p>Fanouškovský web o hře Assassin's Creed Origins – starověký Egypt, hlavní hrdina Bayek a
+                                svět hry.</p>
+                            <span class="project-tech">HTML / CSS</span>
+                            <span class="project-link-text">Zobrazit ↗</span>
+                        </div>
+                    </article>
+                </a>
                 <a href="https://daniel-gorcica.github.io/stredozeme/" target="_blank" rel="noopener"
                     class="project-card" data-project-card>
                     <article>
-                        <div class="project-number">03</div>
+                        <div class="project-number">04</div>
                         <div class="project-art"><span class="art-logo art-lotr">LORD OF THE RINGS</span></div>
                         <div class="project-info">
                             <h3>Středozemě</h3>
@@ -175,7 +196,7 @@
                 <a href="https://daniel-gorcica.github.io/projekt1-web/" target="_blank" rel="noopener"
                     class="project-card" data-project-card>
                     <article>
-                        <div class="project-number">04</div>
+                        <div class="project-number">05</div>
                         <div class="project-art"><img class="project-image" src="images/rocket-league-logo.png"
                                 alt="Rocket League"></div>
                         <div class="project-info">
@@ -189,7 +210,7 @@
                 <a href="https://daniel-gorcica.github.io/pocasi/" target="_blank" rel="noopener" class="project-card"
                     data-project-card>
                     <article>
-                        <div class="project-number">05</div>
+                        <div class="project-number">06</div>
                         <div class="project-art"><span class="art-emoji">🌤️</span></div>
                         <div class="project-info">
                             <h3>Počasí</h3>
@@ -202,7 +223,7 @@
                 <a href="https://daniel-gorcica.github.io/googlesearch/" target="_blank" rel="noopener"
                     class="project-card" data-project-card>
                     <article>
-                        <div class="project-number">06</div>
+                        <div class="project-number">07</div>
                         <div class="project-art"><img class="project-image project-logo" src="images/google-g.png"
                                 alt="Google"></div>
                         <div class="project-info">
@@ -216,7 +237,7 @@
                 <a href="https://daniel-gorcica.github.io/minecraft/" target="_blank" rel="noopener"
                     class="project-card" data-project-card>
                     <article>
-                        <div class="project-number">07</div>
+                        <div class="project-number">08</div>
                         <div class="project-art"><img class="project-image" src="images/minecraft.jpg" alt="Minecraft">
                         </div>
                         <div class="project-info">
@@ -230,7 +251,7 @@
                 <a href="https://daniel-gorcica.github.io/real_madrid/" target="_blank" rel="noopener"
                     class="project-card" data-project-card>
                     <article>
-                        <div class="project-number">08</div>
+                        <div class="project-number">09</div>
                         <div class="project-art"><img class="project-image" src="images/real-madrid-logo.png"
                                 alt="Real Madrid"></div>
                         <div class="project-info">
